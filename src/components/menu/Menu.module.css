@@ -1,5 +1,33 @@
 .menu {
-    background-color: aqua;
     grid-area: menu;
     padding: 20px;
+    border: 1px solid rgb(195, 195, 255);
+    box-shadow: 5px 5px rgb(234, 234, 252);
+}
+
+/* CHOOSE BLOCK */
+
+.chooseBlock {
+    margin-bottom: 30px;
+}
+
+.chooseBlock span {
+    margin-left: 15px;
+    font-weight: 700;
+    font-size: 18px;
+    color: rgb(175, 175, 252);
+}
+
+.menuList {
+    list-style: none;
+    margin: 0 0 0 18px;
+    padding: 0;
+}
+
+.menuList a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 400;
+    color: blue;
+
 }

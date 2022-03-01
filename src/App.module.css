@@ -1,7 +1,7 @@
 .app {
     max-width: 1440px;
     height: 1000px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     margin: 0 auto;
     display: grid;
     grid-template-areas:
@@ -14,6 +14,7 @@
 }
 
 .main {
-    background-color: beige;
     grid-area: main;
+    border: 1px solid rgb(195, 195, 255);
+    box-shadow: 5px 5px rgb(234, 234, 252);
 }
