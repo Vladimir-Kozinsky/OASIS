@@ -1,0 +1,19 @@
+.app {
+    max-width: 1440px;
+    height: 1000px;
+    border: 1px solid red;
+    margin: 0 auto;
+    display: grid;
+    grid-template-areas:
+        'header header'
+        'menu main'
+        'footer footer';
+    grid-template-columns: 240px 1190px;
+    grid-template-rows: 100px 750px 130px;
+    gap: 10px;
+}
+
+.main {
+    background-color: beige;
+    grid-area: main;
+}

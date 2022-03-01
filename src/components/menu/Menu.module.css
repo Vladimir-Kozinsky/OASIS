@@ -1,0 +1,5 @@
+.menu {
+    background-color: aqua;
+    grid-area: menu;
+    padding: 20px;
+}
