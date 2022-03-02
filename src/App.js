@@ -4,8 +4,8 @@ import Legs from './components/main/Legs';
 import Home from './components/main/Home';
 import { Routes, Route, Link } from "react-router-dom";
 import Header from './components/header/Header';
-import Menu from './components/menu/Menu';
 import Footer from './components/footer/Footer';
+import MENU_W from './components/wrapComponents/Menu_w';
 
 
 class App extends Component {
@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <div className={s.app}>
         <Header />
-        <Menu />
+        <MENU_W />
         <Footer />
         <div className={s.main} >
           <Routes>

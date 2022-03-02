@@ -34,7 +34,8 @@ class Menu extends Component {
 
     onChange(value, actionMeta) {
         const msn = value.value
-        this.setState({ msn });
+        this.props.set_msn(msn)
+       // this.setState({ msn });
     }
 
     render() {
