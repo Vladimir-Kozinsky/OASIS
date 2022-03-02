@@ -9,15 +9,9 @@ const options = [
     { value: '25896', label: '25896' }
 ]
 
-const filterAC = (inputValue) => {
-    return options.filter((i) =>
-        i.label.toLowerCase().includes(inputValue.toLowerCase())
-    );
-};
 
-const loadOptions = (inputValue, callback) => {
-    callback(filterAC(inputValue))
-};
+
+
 
 class Menu extends Component {
     constructor(props) {
@@ -25,6 +19,12 @@ class Menu extends Component {
         this.state = {}
         this.onChange = this.onChange.bind(this);
     }
+
+
+    loadOptions = (inputValue, callback) => {
+        callback(this.props.get_aircrafts())
+    }
+
 
     handleInputChange = (newValue) => {
         const inputValue = newValue.replace(/\W/g, "");
@@ -35,17 +35,17 @@ class Menu extends Component {
     onChange(value, actionMeta) {
         const msn = value.value
         this.props.set_msn(msn)
-       // this.setState({ msn });
+        // this.setState({ msn });
     }
 
     render() {
         return (
             <div className={s.menu}>
                 <div className={s.chooseBlock}>
-                    <span>Choose aircraft</span>
+                    <span>Choose aircraft </span>
                     <AsyncSelect
                         cacheOptions
-                        loadOptions={loadOptions}
+                        loadOptions={this.loadOptions}
                         defaultOptions
                         onInputChange={this.handleInputChange}
                         onChange={this.onChange}

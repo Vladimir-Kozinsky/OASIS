@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { setMSN } from './../actionCreators/action_1';
+import menuReduser from './menuReduser';
 
 const reducers = combineReducers({
-    setMSN,
+    MSN: menuReduser,
 });
 
 export default reducers;
