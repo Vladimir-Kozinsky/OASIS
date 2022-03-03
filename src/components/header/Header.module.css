@@ -28,13 +28,14 @@
 }
 
 .acDataItem {
-    display: flex;
-    justify-content: space-between;
-    width: 100px;
-    background-color: antiquewhite;
+    width: 90px;
+    color: rgb(119, 119, 250);
+    font-weight: 700;
+}
+.acDataItem span:last-child {
+    margin-left: 5px;
 }
 
 .navMenu {
     width: 55%;
-    background-color: bisque;
 }

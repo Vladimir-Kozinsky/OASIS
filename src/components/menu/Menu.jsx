@@ -2,29 +2,46 @@ import s from './Menu.module.css';
 import { Component } from 'react'
 import AsyncSelect from 'react-select/async';
 import { Link } from "react-router-dom";
+import Select from 'react-select';
 
-const options = [
-    { value: '24985', label: '24985' },
-    { value: '32546', label: '32546' },
-    { value: '25896', label: '25896' }
-]
-
-
-
-
+const customStyles = {
+    input: (provided, state) => ({
+        ...provided,
+        color: 'rgb(119, 119, 250)',
+    }),
+    placeholder: (provided, state) => ({
+        ...provided,
+        color: 'rgb(119, 119, 250, 0.8)',
+    }),
+    option: (provided, state) => ({
+        ...provided,
+    }),
+    singleValue: (provided, state) => ({
+        ...provided,
+        color: 'rgb(119, 119, 250)'
+    }),
+}
 
 class Menu extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            isDisabled: true,
+            isLoading: true
+        }
         this.onChange = this.onChange.bind(this);
     }
 
-
-    loadOptions = (inputValue, callback) => {
-        callback(this.props.get_aircrafts())
+    componentDidMount() {
+        this.props.getAircrafts()
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.aircrafts !== prevProps.aircrafts) {
+            this.setState({ isDisabled: false });
+            this.setState({ isLoading: false });
+        }
+    }
 
     handleInputChange = (newValue) => {
         const inputValue = newValue.replace(/\W/g, "");
@@ -34,21 +51,30 @@ class Menu extends Component {
 
     onChange(value, actionMeta) {
         const msn = value.value
-        this.props.set_msn(msn)
-        // this.setState({ msn });
+        this.props.setAircraft(msn)
     }
+
+
 
     render() {
         return (
             <div className={s.menu}>
                 <div className={s.chooseBlock}>
                     <span>Choose aircraft </span>
-                    <AsyncSelect
-                        cacheOptions
-                        loadOptions={this.loadOptions}
-                        defaultOptions
+                    <Select
+                        className={s.select}
+                        styles={customStyles}
+                        // classNamePrefix="select"
+                        // defaultValue={colourOptions[0]}
+                        isDisabled={this.state.isDisabled}
+                        isLoading={this.state.isLoading}
                         onInputChange={this.handleInputChange}
                         onChange={this.onChange}
+                        // isClearable={isClearable}
+                        // isRtl={isRtl}
+                        // isSearchable={isSearchable}
+                        // name="color"
+                        options={this.props.aircrafts}
                     />
                 </div>
 

@@ -4,8 +4,8 @@ import Header from "../header/Header";
 
 const mapStateToProps = (state) => {
     return {
-        msn: state.MSN.msn,
-        aircraftData: state.MSN.aircraftData
+        aircraft: state.menu.aircraft,
+        aircraftData: state.menu.aircraftData
     }
 }
 

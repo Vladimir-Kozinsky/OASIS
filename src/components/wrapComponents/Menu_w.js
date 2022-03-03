@@ -1,24 +1,14 @@
 import { connect } from "react-redux";
 import Menu from "./../menu/Menu";
-
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         set_msn: (msn) => dispatch({ type: 'SET_MSN', payload: msn }),
-//         get_aircrafts: () => {
-//             getAircrafts()
-
-//            dispatch({type: 'GET_AIRCRAFTS', aircrafts}) 
-//         } 
-//     }
-// }
+import {getAircrafts, setAircraft} from './../../store/redusers/menuReduser'
 
 const mapStateToProps = (state) => {
     return {
-        msn: state.MSN.msn
+        msn: state.menu.msn,
+        aircrafts: state.menu.aircrafts
     }
 }
 
-const MENU_W = connect(mapStateToProps, {set_msn})(Menu)
+const MENU_W = connect(mapStateToProps, {getAircrafts, setAircraft} )(Menu)
 
 export default MENU_W

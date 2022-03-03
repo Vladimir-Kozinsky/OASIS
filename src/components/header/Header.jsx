@@ -5,9 +5,16 @@ import logo from './../../common/logo.jpg';
 class Header extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            aircraftData: {}
+        }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.aircraftData !== prevProps.aircraftData) {
+            this.setState({ aircraftData: this.props.aircraftData });
+        }
+    }
 
     render() {
         return (
@@ -16,15 +23,15 @@ class Header extends Component {
                 <div className={s.acData}>
                     <div className={s.acDataItem}>
                         <span>MSN:</span>
-                        <span>{this.props.msn}</span>
+                        <span>{this.state.aircraftData.msn}</span>
                     </div>
                     <div className={s.acDataItem}>
                         <span>FH:</span>
-                        <span>{this.props.aircraftData.FH}</span>
+                        <span>{this.state.aircraftData.FH}</span>
                     </div>
                     <div className={s.acDataItem}>
                         <span>FC:</span>
-                        <span>{this.props.aircraftData.FC}</span>
+                        <span>{this.state.aircraftData.FC}</span>
                     </div>
                 </div>
                 <nav className={s.navMenu}>
