@@ -1,11 +1,11 @@
 import s from './App.module.css';
 import { Component } from 'react'
-import Legs from './components/main/Legs';
 import Home from './components/main/Home';
 import { Routes, Route, Link } from "react-router-dom";
 import Footer from './components/footer/Footer';
 import MENU_W from './components/wrapComponents/Menu_w';
 import HEADER_W from './components/wrapComponents/Header_w';
+import LEGS_W from './components/wrapComponents/Legs_w';
 
 
 class App extends Component {
@@ -24,7 +24,7 @@ class App extends Component {
         <Footer />
         <div className={s.main} >
           <Routes>
-            <Route path='legs' element={<Legs />} />
+            <Route path='legs' element={<LEGS_W />} />
             <Route path='/' element={<Home />} />
           </Routes>
         </div>
