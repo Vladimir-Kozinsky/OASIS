@@ -1,6 +1,7 @@
 import Button from '../../../../common/buttons/Button'
 import s from './LegsAddForm.module.css'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { addLeg } from '../../../../store/redusers/legsReduser';
 
 
 const leg_block_class = s.leg_block + ' ' + s.active;
@@ -36,14 +37,14 @@ const LegsAddForm = (props) => {
             </div>
             <Formik
                 initialValues={{
-                    depDate: '',
-                    flightNo: '',
-                    from: '',
-                    to: '',
-                    blockOff: '',
-                    takeOff: '',
-                    landing: '',
-                    blockOn: '',
+                    depDate: '22.05.2022',
+                    flightNumber: 'txc2345',
+                    from: 'EDDT',
+                    to: 'EDDE',
+                    blockOff: '22:44',
+                    takeOff: '22:44',
+                    landing: '22:44',
+                    blockOn: '22:44',
                 }}
 
                 validate={values => {
@@ -59,35 +60,36 @@ const LegsAddForm = (props) => {
                 }}
 
                 onSubmit={(values) => {
-                    console.log(values)
+                    props.addLeg(props.msn, values)
+                    props.addLegForm()
                 }}
             >
                 <Form >
                     <div className={s.leg_block}>
                         <div className={s.leg_block_item}>
-                            <Field id='depDate' name='depDate' placeholder='none' />
-                            <ErrorMessage name="depDate" component="div" />
+                            <Field className={s.leg_block_date} type='date' id='depDate' name='depDate' placeholder='none' />
+                            {/* <ErrorMessage name="depDate" component="div" /> */}
                         </div>
                         <div className={s.leg_block_item}>
-                            <Field id='flightNo' name='flightNo' placeholder='none' />
+                            <Field className={s.leg_block_text} type='text' id='flightNumber' name='flightNumber' placeholder='none' />
                         </div>
                         <div className={s.leg_block_item}>
-                            <Field id='from' name='from' placeholder='none' />
+                            <Field className={s.leg_block_text} type='text' id='from' name='from' placeholder='none' />
                         </div>
                         <div className={s.leg_block_item}>
-                            <Field id='to' name='to' placeholder='none' />
+                            <Field className={s.leg_block_text} type='text' id='to' name='to' placeholder='none' />
                         </div>
                         <div className={s.leg_block_item}>
-                            <Field id='blockOff' name='blockOff' placeholder='none' />
+                            <Field className={s.leg_block_time} type='time' id='blockOff' name='blockOff' placeholder='none' />
                         </div>
                         <div className={s.leg_block_item}>
-                            <Field id='takeOff' name='takeOff' placeholder='none' />
+                            <Field className={s.leg_block_time} type='time' id='takeOff' name='takeOff' placeholder='none' />
                         </div>
                         <div className={s.leg_block_item}>
-                            <Field id='landing' name='landing' placeholder='none' />
+                            <Field className={s.leg_block_time} type='time' id='landing' name='landing' placeholder='none' />
                         </div>
                         <div className={s.leg_block_item}>
-                            <Field id='blockOn' name='blockOn' placeholder='none' />
+                            <Field className={s.leg_block_time} type='time' id='blockOn' name='blockOn' placeholder='none' />
                         </div>
                     </div>
                     <div className={s.addFormControlPanel}>

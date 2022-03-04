@@ -28,6 +28,15 @@ export const getLegs = (msn) => {
     }
 }
 
+export const addLeg = (msn, leg) => {
+    return async (dispatch) => {
+        const legs = await aircraftAPI.addLeg(msn, leg)
+        setTimeout(() => {
+            dispatch(setLegs(legs))
+        }, 1000);
+    }
+}
+
 
 
 export default legsReduser

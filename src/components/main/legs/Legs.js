@@ -16,15 +16,15 @@ class Legs extends React.Component {
         this.addLegForm = this.addLegForm.bind(this);
     }
 
-
     componentDidUpdate(prevProps) {
         if (this.props.aircraftData !== prevProps.aircraftData) {
             this.props.getLegs(this.props.aircraftData.msn)
         }
+        console.log('did update')
     }
 
     legs() {
-        if (this.props.legs) {
+        if (this.props.legs.length > 0) {
             return this.props.legs.map((leg) => {
                 return (
                     <div className={s.leg_block}>
@@ -41,7 +41,7 @@ class Legs extends React.Component {
                             <span>{leg.to}</span>
                         </div>
                         <div className={s.leg_block_item}>
-                            <span>{leg.blockOFF}</span>
+                            <span>{leg.blockOff}</span>
                         </div>
                         <div className={s.leg_block_item}>
                             <span>{leg.takeOff}</span>
@@ -50,7 +50,7 @@ class Legs extends React.Component {
                             <span>{leg.landing}</span>
                         </div>
                         <div className={s.leg_block_item}>
-                            <span>{leg.blockON}</span>
+                            <span>{leg.blockOn}</span>
                         </div>
                     </div>
                 )
@@ -107,7 +107,10 @@ class Legs extends React.Component {
                         {this.legs()}
                     </div>
                     {this.state.isAddForm
-                        ? <LegsAddForm addLegForm={this.addLegForm} />
+                        ? <LegsAddForm
+                            msn={this.props.aircraftData.msn}
+                            addLeg={this.props.addLeg}
+                            addLegForm={this.addLegForm} />
                         : null
                     }
                     {!this.state.isAddForm

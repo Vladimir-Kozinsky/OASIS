@@ -18,105 +18,36 @@ const aircraftsData = [
                 flightNumber: 'ER425',
                 from: 'EDDT',
                 to: 'EDDE',
-                blockOFF: '15:44',
+                blockOff: '15:44',
                 takeOff: '15:50',
                 landing: '18:00',
-                blockON: '18:10'
+                blockOn: '18:10'
             },
             {
                 depDate: '25.04.2018',
                 flightNumber: 'ER425',
                 from: 'EDDT',
                 to: 'EDDE',
-                blockOFF: '15:44',
+                blockOff: '15:44',
                 takeOff: '15:50',
                 landing: '18:00',
-                blockON: '18:10'
+                blockOn: '18:10'
             },
             {
                 depDate: '25.04.2018',
                 flightNumber: 'ER425',
                 from: 'EDDT',
                 to: 'EDDE',
-                blockOFF: '15:44',
+                blockOff: '15:44',
                 takeOff: '15:50',
                 landing: '18:00',
-                blockON: '18:10'
+                blockOn: '18:10'
             },
-            {
-                depDate: '25.04.2018',
-                flightNumber: 'ER425',
-                from: 'EDDT',
-                to: 'EDDE',
-                blockOFF: '15:44',
-                takeOff: '15:50',
-                landing: '18:00',
-                blockON: '18:10'
-            },
-            {
-                depDate: '25.04.2018',
-                flightNumber: 'ER425',
-                from: 'EDDT',
-                to: 'EDDE',
-                blockOFF: '15:44',
-                takeOff: '15:50',
-                landing: '18:00',
-                blockON: '18:10'
-            },
-            {
-                depDate: '25.04.2018',
-                flightNumber: 'ER425',
-                from: 'EDDT',
-                to: 'EDDE',
-                blockOFF: '15:44',
-                takeOff: '15:50',
-                landing: '18:00',
-                blockON: '18:10'
-            },
-            {
-                depDate: '25.04.2018',
-                flightNumber: 'ER425',
-                from: 'EDDT',
-                to: 'EDDE',
-                blockOFF: '15:44',
-                takeOff: '15:50',
-                landing: '18:00',
-                blockON: '18:10'
-            },
-            {
-                depDate: '25.04.2018',
-                flightNumber: 'ER425',
-                from: 'EDDT',
-                to: 'EDDE',
-                blockOFF: '15:44',
-                takeOff: '15:50',
-                landing: '18:00',
-                blockON: '18:10'
-            },
-            {
-                depDate: '25.04.2018',
-                flightNumber: 'ER425',
-                from: 'EDDT',
-                to: 'EDDE',
-                blockOFF: '15:44',
-                takeOff: '15:50',
-                landing: '18:00',
-                blockON: '18:10'
-            },
-            {
-                depDate: '25.04.2018',
-                flightNumber: 'ER425',
-                from: 'EDDT',
-                to: 'EDDE',
-                blockOFF: '15:44',
-                takeOff: '15:50',
-                landing: '18:00',
-                blockON: '18:10'
-            },
+
         ]
     },
-    { msn: 32546, FH: 32999, FC: 32888 },
-    { msn: 25896, FH: 25999, FC: 25888 },
+    { msn: 32546, FH: 32999, FC: 32888, legs: [] },
+    { msn: 25896, FH: 25999, FC: 25888, legs: [] },
 ]
 
 
@@ -134,7 +65,10 @@ export const aircraftAPI = {
     getLegs(msn) {
         const aircraftData = aircraftsData.find(el => el.msn == msn)
         return aircraftData.legs
+    },
+    addLeg(msn, leg) {
+        const aircraftData = aircraftsData.find(el => el.msn == msn)
+        aircraftData.legs.push(leg)
+        return aircraftData.legs
     }
-
-
 }

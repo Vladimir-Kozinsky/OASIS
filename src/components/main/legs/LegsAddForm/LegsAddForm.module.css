@@ -40,3 +40,29 @@
     display: flex;
     justify-content: space-between;
 }
+
+/* inputs */
+.leg_block_text[type="text"] {
+    text-align: center;
+    color: rgb(82, 82, 247);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.leg_block_date[type="date"] {
+    color: rgb(82, 82, 247);
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+.leg_block_time[type="time"] {
+    color: rgb(82, 82, 247);
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block_date::-webkit-calendar-picker-indicator {
+    margin: 0 0;
+}
