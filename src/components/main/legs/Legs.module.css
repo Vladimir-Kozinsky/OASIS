@@ -65,3 +65,13 @@
     font-family: 'Roboto', sans-serif;
     color: rgb(160, 160, 250);
 }
+
+/* CONTROL PANEL */
+
+.controlPanel {
+    margin: 30px auto;
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+}
+

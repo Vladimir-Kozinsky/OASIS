@@ -1,7 +1,7 @@
 import React from 'react'
+import Button from '../../../common/buttons/Button';
 import s from './Legs.module.css'
-
-
+import LegsAddForm from './LegsAddForm/LegsAddForm';
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
@@ -9,10 +9,13 @@ class Legs extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            aircraftData: {}
+            aircraftData: {},
+            isAddForm: false
         }
         this.onChange = this.legs.bind(this);
+        this.addLegForm = this.addLegForm.bind(this);
     }
+
 
     componentDidUpdate(prevProps) {
         if (this.props.aircraftData !== prevProps.aircraftData) {
@@ -61,6 +64,14 @@ class Legs extends React.Component {
         }
     }
 
+    addLegForm() {
+        if (this.state.isAddForm) {
+            this.setState({ isAddForm: false });
+        } else {
+            this.setState({ isAddForm: true });
+        }
+    }
+
     render() {
         return (
             <div className={s.legs}>
@@ -95,9 +106,17 @@ class Legs extends React.Component {
                         </div>
                         {this.legs()}
                     </div>
-                    <div className={s.controlPanel}>
-
-                    </div>
+                    {this.state.isAddForm
+                        ? <LegsAddForm addLegForm={this.addLegForm} />
+                        : null
+                    }
+                    {!this.state.isAddForm
+                        ? <div className={s.controlPanel}>
+                            <Button event={this.addLegForm} text='Add Leg' />
+                            <Button text='Edit Mode' />
+                        </div>
+                        : null
+                    }
                 </div>
             </div>
         )

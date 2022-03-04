@@ -1,0 +1,42 @@
+.leg_block {
+    margin-top: 5px;
+    background-color: rgb(241, 241, 252);
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.leg_block_item {
+    width: 120px;
+    text-align: center;
+}
+
+.leg_block_item span {
+    color: rgb(82, 82, 247);
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block.active {
+    border-bottom: 1px solid rgb(195, 195, 255);
+    background-color: white;
+}
+
+/* ADD FORM */
+.addForm {
+    margin-top: 20px;
+    border: 1px solid rgb(195, 195, 255);
+}
+
+.leg_block_item input {
+    width: 100px;
+    margin-bottom: 5px;
+}
+
+.addFormControlPanel {
+    margin: 20px auto;
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+}
