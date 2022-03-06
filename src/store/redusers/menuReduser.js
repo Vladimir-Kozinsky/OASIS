@@ -1,7 +1,7 @@
 import { aircraftAPI } from './../../API/API'
 
 const defaultState = {
-    aircraft: 'none',
+    aircraft: null,
     aircrafts: null,
     aircraftData: {}
 }
@@ -30,31 +30,31 @@ const menuReduser = (state = defaultState, action) => {
 
 const setAircrafts = (aircrafts) => ({ type: 'GET_AIRCRAFTS', payload: aircrafts })
 const setAircrafts_AC = (msn) => ({ type: 'SET_AIRCRAFT', payload: msn })
-const setAircraftData = (data) => ({ type: 'GET_AIRCRAFT_DATA', payload: data })
+const setAircraftData = (aircraftData) => ({ type: 'GET_AIRCRAFT_DATA', payload: aircraftData })
 
 
 export const getAircrafts = () => {
     return async (dispatch) => {
-        const aircrafts = await aircraftAPI.getAircrafts()
-        setTimeout(() => {
-            dispatch(setAircrafts(aircrafts))
-        }, 2000);
+        const aircraftsList = await aircraftAPI.getAircrafts()
+        let aircrafts = [];
+        aircraftsList.forEach(element => {
+            aircrafts.push({ value: element, label: element })
+        });
+        dispatch(setAircrafts(aircrafts))
     }
 }
 export const setAircraft = (msn) => {
     return async (dispatch) => {
-        const data = await aircraftAPI.getAircraftData(msn)
-
-        setTimeout(() => {
-            dispatch(setAircraftData(data))
-        }, 2000);
-        dispatch(setAircrafts_AC(msn))
+        const aircraftData = await aircraftAPI.getAircraftData(msn)
+        dispatch(setAircraftData(aircraftData))
+        dispatch(setAircrafts_AC(aircraftData.msn))
     }
 }
 
 export const getAircraftData = (msn) => {
-    return (dispatch) => {
-        dispatch(setAircrafts_AC(msn))
+    return async (dispatch) => {
+        const aircraftData = await aircraftAPI.getAircraftData(msn)
+        dispatch(setAircraftData(aircraftData))
     }
 }
 

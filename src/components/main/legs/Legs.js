@@ -9,22 +9,27 @@ class Legs extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            aircraftData: {},
             isAddForm: false
         }
         this.onChange = this.legs.bind(this);
         this.addLegForm = this.addLegForm.bind(this);
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.aircraftData !== prevProps.aircraftData) {
-            this.props.getLegs(this.props.aircraftData.msn)
+    componentDidMount() {
+        if (this.props.aircraft) {
+            this.props.getLegs(this.props.aircraft)
         }
+    }
+    componentDidUpdate(prevProps) {
+        if (this.props.aircraft !== prevProps.aircraft) {
+            this.props.getLegs(this.props.aircraft)
+        }
+
         console.log('did update')
     }
 
     legs() {
-        if (this.props.legs.length > 0) {
+        if (this.props.legs) {
             return this.props.legs.map((leg) => {
                 return (
                     <div className={s.leg_block}>
@@ -51,6 +56,12 @@ class Legs extends React.Component {
                         </div>
                         <div className={s.leg_block_item}>
                             <span>{leg.blockOn}</span>
+                        </div>
+                        <div className={s.leg_block_item}>
+                            <span>{leg.fh}</span>
+                        </div>
+                        <div className={s.leg_block_item}>
+                            <span>{leg.fc}</span>
                         </div>
                     </div>
                 )
@@ -103,12 +114,18 @@ class Legs extends React.Component {
                             <div className={s.leg_block_item}>
                                 <span>Block ON</span>
                             </div>
+                            <div className={s.leg_block_item}>
+                                <span>FH</span>
+                            </div>
+                            <div className={s.leg_block_item}>
+                                <span>FC</span>
+                            </div>
                         </div>
                         {this.legs()}
                     </div>
                     {this.state.isAddForm
                         ? <LegsAddForm
-                            msn={this.props.aircraftData.msn}
+                            msn={this.props.aircraft}
                             addLeg={this.props.addLeg}
                             addLegForm={this.addLegForm} />
                         : null

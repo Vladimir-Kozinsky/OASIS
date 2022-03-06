@@ -1,9 +1,9 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const proxy = axios.create({
-//     baseURL: "http://localhost:4000/"
+const proxy = axios.create({
+    baseURL: "http://localhost:5000"
+})
 
-// })
 const aircrafts = [
     { value: '24985', label: '24985' },
     { value: '32546', label: '32546' },
@@ -12,7 +12,7 @@ const aircrafts = [
 
 const aircraftsData = [
     {
-        msn: 24985, FH: 24999, FC: 24888, legs: [
+        msn: 24985, FH: '24999', FC: '24888', legs: [
             {
                 depDate: '25.04.2018',
                 flightNumber: 'ER425',
@@ -21,29 +21,12 @@ const aircraftsData = [
                 blockOff: '15:44',
                 takeOff: '15:50',
                 landing: '18:00',
-                blockOn: '18:10'
-            },
-            {
-                depDate: '25.04.2018',
-                flightNumber: 'ER425',
-                from: 'EDDT',
-                to: 'EDDE',
-                blockOff: '15:44',
-                takeOff: '15:50',
-                landing: '18:00',
-                blockOn: '18:10'
-            },
-            {
-                depDate: '25.04.2018',
-                flightNumber: 'ER425',
-                from: 'EDDT',
-                to: 'EDDE',
-                blockOff: '15:44',
-                takeOff: '15:50',
-                landing: '18:00',
-                blockOn: '18:10'
-            },
-
+                blockOn: '18:10',
+                flightTime: '23:45',
+                blockTime: '23:45',
+                curentFH: '23:45',
+                curentFC: '23:45'
+            }
         ]
     },
     { msn: 32546, FH: 32999, FC: 32888, legs: [] },
@@ -53,22 +36,26 @@ const aircraftsData = [
 
 export const aircraftAPI = {
     getAircrafts() {
-        return aircrafts
-        // proxy.get('aircraft/info/', {
-        //     params: { msn: msn }
-        // }).then(response => response.data)
+        return proxy.get('/aircrafts', {
+        }).then(response => response.data)
     },
     getAircraftData(msn) {
-        const aircraftData = aircraftsData.find(el => el.msn == msn)
-        return aircraftData
+        return proxy.get('/aircrafts/aircraft/data', {
+            params: { msn: msn }
+        }).then(response => response.data)
     },
     getLegs(msn) {
-        const aircraftData = aircraftsData.find(el => el.msn == msn)
-        return aircraftData.legs
+        return proxy.get('/aircrafts/aircraft/legs', {
+            params: { msn: msn }
+        }).then(response => response.data)
     },
     addLeg(msn, leg) {
-        const aircraftData = aircraftsData.find(el => el.msn == msn)
-        aircraftData.legs.push(leg)
-        return aircraftData.legs
+        return proxy.post('/aircrafts/legs/add', { msn, leg }).then(response => response.data)
+    },
+
+    addAircraft(msn, FH, FC, leg) {
+        return proxy.post('/aircrafts/add', aircraftsData[0]).then(response => response.data)
     }
 }
+
+//aircraftAPI.addAircraft()

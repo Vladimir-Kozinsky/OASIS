@@ -4,11 +4,14 @@ import Legs from "../main/legs/Legs";
 
 const mapStateToProps = (state) => {
     return {
-        aircraftData: state.menu.aircraftData,
+        aircraft: state.menu.aircraft,
         legs: state.legs.legs,
+        aircraftData: state.menu.aircraftData
     }
 }
 
-const LEGS_W = connect(mapStateToProps, { getLegs, addLeg })(Legs)
+const LEGS_W = connect(mapStateToProps, { 
+    getLegs, 
+    addLeg })(Legs)
 
 export default LEGS_W

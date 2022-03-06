@@ -1,7 +1,7 @@
 import { aircraftAPI } from '../../API/API'
 
 const defaultState = {
-    legs: []
+    legs: null
 }
 
 const legsReduser = (state = defaultState, action) => {
@@ -22,18 +22,16 @@ const setLegs = (legs) => ({ type: 'SET_LEGS', payload: legs })
 export const getLegs = (msn) => {
     return async (dispatch) => {
         const legs = await aircraftAPI.getLegs(msn)
-        setTimeout(() => {
-            dispatch(setLegs(legs))
-        }, 1000);
+        dispatch(setLegs(legs))
     }
 }
 
 export const addLeg = (msn, leg) => {
     return async (dispatch) => {
-        const legs = await aircraftAPI.addLeg(msn, leg)
-        setTimeout(() => {
-            dispatch(setLegs(legs))
-        }, 1000);
+        const data = await aircraftAPI.addLeg(msn, leg)
+        if (data.resultCode == 1) {
+            dispatch(setLegs(data.legs))
+        }
     }
 }
 
