@@ -1,4 +1,5 @@
 import { aircraftAPI } from '../../API/API'
+import { getAircraftData } from './menuReduser'
 
 const defaultState = {
     legs: null
@@ -31,6 +32,7 @@ export const addLeg = (msn, leg) => {
         const data = await aircraftAPI.addLeg(msn, leg)
         if (data.resultCode == 1) {
             dispatch(setLegs(data.legs))
+            dispatch(getAircraftData(msn))
         }
     }
 }

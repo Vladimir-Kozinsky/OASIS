@@ -125,6 +125,7 @@ class Legs extends React.Component {
                     </div>
                     {this.state.isAddForm
                         ? <LegsAddForm
+                            aircraftData={this.props.aircraftData}
                             msn={this.props.aircraft}
                             addLeg={this.props.addLeg}
                             addLegForm={this.addLegForm} />
