@@ -33,13 +33,27 @@
 
 
 .leg_block_item {
-    width: 120px;
+    width: 112px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.leg_block_item_text {
+    width: 73px;
+    overflow: hidden;
     text-align: center;
 }
 
 .leg_block_item span {
     color: rgb(82, 82, 247);
     font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block_item_text span {
+    color: rgb(82, 82, 247);
+    font-size: 13px;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
 }

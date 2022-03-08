@@ -3,17 +3,29 @@
     background-color: rgb(241, 241, 252);
     display: flex;
     justify-content: space-between;
+    padding: 5px;
 }
 
-
 .leg_block_item {
-    width: 120px;
+    width: 112px;
+    overflow: hidden;
+    text-align: center;
+}
+.leg_block_item_text {
+    width: 73px;
+    overflow: hidden;
     text-align: center;
 }
 
 .leg_block_item span {
-    color: rgb(82, 82, 247);
+    color: rgb(119, 119, 250);
     font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+.leg_block_item_text span {
+    color: rgb(119, 119, 250);
+    font-size: 13px;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
 }
@@ -30,7 +42,11 @@
 }
 
 .leg_block_item input {
-    width: 100px;
+   width: 93%;
+    margin-bottom: 5px;
+}
+.leg_block_item_text input {
+   width: 87%;
     margin-bottom: 5px;
 }
 
@@ -42,6 +58,10 @@
 }
 
 /* inputs */
+.leg_block_text {
+    width: 55px;
+}
+
 .leg_block_text[type="text"] {
     text-align: center;
     color: rgb(82, 82, 247);
@@ -56,6 +76,7 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
 }
+
 .leg_block_time[type="time"] {
     color: rgb(82, 82, 247);
     font-size: 13px;

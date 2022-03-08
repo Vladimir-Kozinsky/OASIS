@@ -51,19 +51,25 @@ const LegsAddForm = (props) => {
         return final_fh
     }
 
+    const calculateFlightBlockTime = (start_date, start_time, end_time) => {
+        const time_period_mm = time_subtraction(start_date, start_time, end_time)
+        const HH = Math.floor(time_period_mm / 60)
+        const MM = time_period_mm % 60
+        return `${HH}:${MM}`
+    }
     return (
         <div className={s.addForm}>
             <div className={leg_block_class}>
                 <div className={s.leg_block_item}>
                     <span>Dep. Date</span>
                 </div>
-                <div className={s.leg_block_item}>
+                <div className={s.leg_block_item_text}>
                     <span>Flight No</span>
                 </div>
-                <div className={s.leg_block_item}>
+                <div className={s.leg_block_item_text}>
                     <span>From</span>
                 </div>
-                <div className={s.leg_block_item}>
+                <div className={s.leg_block_item_text}>
                     <span>To</span>
                 </div>
                 <div className={s.leg_block_item}>
@@ -78,10 +84,16 @@ const LegsAddForm = (props) => {
                 <div className={s.leg_block_item}>
                     <span>Block ON</span>
                 </div>
-                <div className={s.leg_block_item}>
+                <div className={s.leg_block_item_text}>
+                    <span>Flight Time</span>
+                </div>
+                <div className={s.leg_block_item_text}>
+                    <span>Block Time</span>
+                </div>
+                <div className={s.leg_block_item_text}>
                     <span>FH</span>
                 </div>
-                <div className={s.leg_block_item}>
+                <div className={s.leg_block_item_text}>
                     <span>FC</span>
                 </div>
             </div>
@@ -95,6 +107,8 @@ const LegsAddForm = (props) => {
                     takeOff: '22:44',
                     landing: '22:44',
                     blockOn: '22:44',
+                    flightTime: '',
+                    blockTime: '',
                     fh: '',
                     fc: '',
                 }}
@@ -103,20 +117,35 @@ const LegsAddForm = (props) => {
                     const errors = {};
                     if (!values.depDate) {
                         errors.depDate = 'Required';
+                    } else if (!values.flightNumber) {
                         errors.flightNumber = 'Required';
+                    } else if (!values.from) {
                         errors.from = 'Required';
+                    } else if (!values.to) {
                         errors.to = 'Required';
+                    } else if (!values.blockOff) {
                         errors.blockOff = 'Required';
-                        errors.landing = 'Required';
+                    } else if (!values.blockOn) {
                         errors.blockOn = 'Required';
+                    } else if (!values.landing) {
+                        errors.landing = 'Required';
+
+
+                    } else if (!values.flightTime) {
+                        errors.flightTime = 'Required';
+                    } else if (!values.blockTime) {
+                        errors.blockTime = 'Required';
+                    } else if (!values.fh) {
                         errors.fh = 'Required';
+                    } else if (!values.fc) {
                         errors.fc = 'Required';
-                        //} 
-                        //</div>else if (
-                        //  !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.depDate)
-                        // ){
-                        // errors.depDate = 'Invalid data';
                     } return errors;
+                    //} 
+                    //</div>else if (
+                    //  !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.depDate)
+                    // ){
+                    // errors.depDate = 'Invalid data';
+
                 }}
 
                 // handleChange={(values) => {
@@ -134,10 +163,11 @@ const LegsAddForm = (props) => {
                         takeOff: initialValues.takeOff,
                         landing: initialValues.landing,
                         blockOn: initialValues.blockOn,
+                        flightTime: initialValues.flightTime,
+                        blockTime: initialValues.blockTime,
                         fh: initialValues.fh,
                         fc: initialValues.fc,
                     }
-
                     props.addLeg(props.msn, values)
                     props.addLegForm() // close addForm
                 }}
@@ -158,40 +188,64 @@ const LegsAddForm = (props) => {
                         <div className={s.leg_block}>
                             <div className={s.leg_block_item}>
                                 <Field className={s.leg_block_date} type='date' id='depDate' name='depDate' placeholder='none' />
-                                {/* <ErrorMessage name="depDate" component="div" /> */}
+                                {errors.depDate ? <span>{errors.depDate}</span> : null}
                             </div>
-                            <div className={s.leg_block_item}>
+                            <div className={s.leg_block_item_text}>
                                 <Field className={s.leg_block_text} type='text' id='flightNumber' name='flightNumber' placeholder='none' />
+                                {errors.flightNumber ? <span>{errors.flightNumber}</span> : null}
                             </div>
-                            <div className={s.leg_block_item}>
+                            <div className={s.leg_block_item_text}>
                                 <Field className={s.leg_block_text} type='text' id='from' name='from' placeholder='none' />
+                                {errors.from ? <span>{errors.from}</span> : null}
                             </div>
-                            <div className={s.leg_block_item}>
+                            <div className={s.leg_block_item_text}>
                                 <Field className={s.leg_block_text} type='text' id='to' name='to' placeholder='none' />
-                            </div>
-                            <div className={s.leg_block_item}>
-                                <Field className={s.leg_block_time} type='time' id='blockOff' name='blockOff' placeholder='none' />
+                                {errors.to ? <span>{errors.to}</span> : null}
                             </div>
                             <div className={s.leg_block_item}>
                                 <Field className={s.leg_block_time} onBlur={e => {
-                                    setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing))
-                                    setFieldValue('fc', calculateFC(props.aircraftData.FС))
-
-                                }} type='time' id='takeOff' name='takeOff' placeholder='none' />
+                                    setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn))
+                                }} type='time' id='blockOff' name='blockOff' placeholder='none' />
+                                {errors.blockTime ? <span>{errors.blockTime}</span> : null}
+                                {errors.blockOff ? <span>{errors.blockOff}</span> : null}
                             </div>
                             <div className={s.leg_block_item}>
                                 <Field className={s.leg_block_time} onBlur={e => {
                                     setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing))
                                     setFieldValue('fc', calculateFC(props.aircraftData.FC))
+                                    setFieldValue('flightTime', calculateFlightBlockTime(values.depDate, values.takeOff, values.landing))
+                                }} type='time' id='takeOff' name='takeOff' placeholder='none' />
+                                {errors.takeOff ? <span>{errors.takeOff}</span> : null}
+                                {errors.flightTime ? <span>{errors.flightTime}</span> : null}
+                                {errors.fh ? <span>{errors.fh}</span> : null}
+                                {errors.fc ? <span>{errors.fc}</span> : null}
+                            </div>
+                            <div className={s.leg_block_item}>
+                                <Field className={s.leg_block_time} onBlur={e => {
+                                    setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing))
+                                    setFieldValue('fc', calculateFC(props.aircraftData.FC))
+                                    setFieldValue('flightTime', calculateFlightBlockTime(values.depDate, values.takeOff, values.landing))
                                 }} type='time' id='landing' name='landing' placeholder='none' />
+                                {errors.landing ? <span>{errors.landing}</span> : null}
+                                {errors.flightTime ? <span>{errors.flightTime}</span> : null}
                             </div>
                             <div className={s.leg_block_item}>
-                                <Field className={s.leg_block_time} type='time' id='blockOn' name='blockOn' placeholder='none' />
+                                <Field className={s.leg_block_time} onBlur={e => {
+                                    setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn))
+                                }} type='time' id='blockOn' name='blockOn' placeholder='none' />
+                                {errors.blockOn ? <span>{errors.blockOn}</span> : null}
+                                {errors.blockTime ? <span>{errors.blockTime}</span> : null}
                             </div>
-                            <div className={s.leg_block_item}>
-                                <Field className={s.leg_block_text} value={calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing)} type='text' id='fh' name='fh' placeholder='none' />
+                            <div className={s.leg_block_item_text}>
+                                <Field className={s.leg_block_text} value={calculateFlightBlockTime(values.depDate, values.takeOff, values.landing)} type='text' id='flightTime' name='flightTime' placeholder='none' disabled />
                             </div>
-                            <div className={s.leg_block_item}>
+                            <div className={s.leg_block_item_text}>
+                                <Field className={s.leg_block_text} value={calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn)} type='text' id='blockTime' name='blockTime' placeholder='none' disabled />
+                            </div>
+                            <div className={s.leg_block_item_text}>
+                                <Field className={s.leg_block_text} value={calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing)} type='text' id='fh' name='fh' placeholder='none' disabled />
+                            </div>
+                            <div className={s.leg_block_item_text}>
                                 <Field className={s.leg_block_text} value={calculateFC(props.aircraftData.FC)} type='text' id='fc' name='fc' placeholder='none' disabled />
                             </div>
                         </div>
@@ -204,7 +258,7 @@ const LegsAddForm = (props) => {
             </Formik>
 
 
-        </div>
+        </div >
     )
 }
 

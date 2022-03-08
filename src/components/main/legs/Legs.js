@@ -36,13 +36,13 @@ class Legs extends React.Component {
                         <div className={s.leg_block_item}>
                             <span>{leg.depDate}</span>
                         </div>
-                        <div className={s.leg_block_item}>
+                        <div className={s.leg_block_item_text}>
                             <span>{leg.flightNumber}</span>
                         </div>
-                        <div className={s.leg_block_item}>
+                        <div className={s.leg_block_item_text}>
                             <span>{leg.from}</span>
                         </div>
-                        <div className={s.leg_block_item}>
+                        <div className={s.leg_block_item_text}>
                             <span>{leg.to}</span>
                         </div>
                         <div className={s.leg_block_item}>
@@ -57,10 +57,16 @@ class Legs extends React.Component {
                         <div className={s.leg_block_item}>
                             <span>{leg.blockOn}</span>
                         </div>
-                        <div className={s.leg_block_item}>
+                        <div className={s.leg_block_item_text}>
+                            <span>{leg.flightTime}</span>
+                        </div>
+                        <div className={s.leg_block_item_text}>
+                            <span>{leg.blockTime}</span>
+                        </div>
+                        <div className={s.leg_block_item_text}>
                             <span>{leg.fh}</span>
                         </div>
-                        <div className={s.leg_block_item}>
+                        <div className={s.leg_block_item_text}>
                             <span>{leg.fc}</span>
                         </div>
                     </div>
@@ -93,13 +99,13 @@ class Legs extends React.Component {
                             <div className={s.leg_block_item}>
                                 <span>Dep. Date</span>
                             </div>
-                            <div className={s.leg_block_item}>
+                            <div className={s.leg_block_item_text}>
                                 <span>Flight No</span>
                             </div>
-                            <div className={s.leg_block_item}>
+                            <div className={s.leg_block_item_text}>
                                 <span>From</span>
                             </div>
-                            <div className={s.leg_block_item}>
+                            <div className={s.leg_block_item_text}>
                                 <span>To</span>
                             </div>
                             <div className={s.leg_block_item}>
@@ -114,10 +120,16 @@ class Legs extends React.Component {
                             <div className={s.leg_block_item}>
                                 <span>Block ON</span>
                             </div>
-                            <div className={s.leg_block_item}>
+                            <div className={s.leg_block_item_text}>
+                                <span>Flight Time</span>
+                            </div>
+                            <div className={s.leg_block_item_text}>
+                                <span>Block Time</span>
+                            </div>
+                            <div className={s.leg_block_item_text}>
                                 <span>FH</span>
                             </div>
-                            <div className={s.leg_block_item}>
+                            <div className={s.leg_block_item_text}>
                                 <span>FC</span>
                             </div>
                         </div>
