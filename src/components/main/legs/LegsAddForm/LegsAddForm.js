@@ -57,44 +57,45 @@ const LegsAddForm = (props) => {
         const MM = time_period_mm % 60
         return `${HH}:${MM}`
     }
+
     return (
         <div className={s.addForm}>
             <div className={leg_block_class}>
                 <div className={s.leg_block_item}>
-                    <span>Dep. Date</span>
+                    <span className={s.leg_block_item_span} >Dep. Date</span>
                 </div>
                 <div className={s.leg_block_item_text}>
-                    <span>Flight No</span>
+                    <span className={s.leg_block_item_span} >Flight No</span>
                 </div>
                 <div className={s.leg_block_item_text}>
-                    <span>From</span>
+                    <span className={s.leg_block_item_span} >From</span>
                 </div>
                 <div className={s.leg_block_item_text}>
-                    <span>To</span>
+                    <span className={s.leg_block_item_span} >To</span>
                 </div>
                 <div className={s.leg_block_item}>
-                    <span>Block OFF</span>
+                    <span className={s.leg_block_item_span} >Block OFF</span>
                 </div>
                 <div className={s.leg_block_item}>
-                    <span>Take OFF</span>
+                    <span className={s.leg_block_item_span} >Take OFF</span>
                 </div>
                 <div className={s.leg_block_item}>
-                    <span>Landing</span>
+                    <span className={s.leg_block_item_span} >Landing</span>
                 </div>
                 <div className={s.leg_block_item}>
-                    <span>Block ON</span>
+                    <span className={s.leg_block_item_span} >Block ON</span>
                 </div>
                 <div className={s.leg_block_item_text}>
-                    <span>Flight Time</span>
+                    <span className={s.leg_block_item_span} >Flight Time</span>
                 </div>
                 <div className={s.leg_block_item_text}>
-                    <span>Block Time</span>
+                    <span className={s.leg_block_item_span} >Block Time</span>
                 </div>
                 <div className={s.leg_block_item_text}>
-                    <span>FH</span>
+                    <span className={s.leg_block_item_span} >FH</span>
                 </div>
                 <div className={s.leg_block_item_text}>
-                    <span>FC</span>
+                    <span className={s.leg_block_item_span} >FC</span>
                 </div>
             </div>
             <Formik
@@ -107,10 +108,10 @@ const LegsAddForm = (props) => {
                     takeOff: '22:44',
                     landing: '22:44',
                     blockOn: '22:44',
-                    flightTime: '00:00',
-                    blockTime: '00:00',
-                    fh: '00:00',
-                    fc: '00',
+                    flightTime: '0',
+                    blockTime: '0',
+                    fh: '0',
+                    fc: '0',
                 }}
 
                 validate={(values) => {
@@ -118,7 +119,7 @@ const LegsAddForm = (props) => {
                     if (!values.depDate) {
                         errors.depDate = 'Required';
                     } else if (!values.flightNumber) {
-                        errors.flightNumber = 'Required';
+                        errors.flightNumber = 'Requir0ed';
                     } else if (!values.from) {
                         errors.from = 'Required';
                     } else if (!values.to) {
@@ -129,13 +130,13 @@ const LegsAddForm = (props) => {
                         errors.blockOn = 'Required';
                     } else if (!values.landing) {
                         errors.landing = 'Required';
-                    } else if (!values.flightTime) {
+                    } else if (!values.flightTime || values.flightTime === '0') {
                         errors.flightTime = 'Required';
-                    } else if (!values.blockTime) {
+                    } else if (!values.blockTime || values.blockTime === '0') {
                         errors.blockTime = 'Required';
-                    } else if (!values.fh) {
+                    } else if (!values.fh || values.fh === '0') {
                         errors.fh = 'Required';
-                    } else if (!values.fc) {
+                    } else if (!values.fc || values.fc === '0') {
                         errors.fc = 'Required';
                     } return errors;
                     //} 
@@ -146,13 +147,7 @@ const LegsAddForm = (props) => {
 
                 }}
 
-                // handleChange={(values) => {
-                //     console.log(values, ' handleChange')
-                // }}
-
-
-                onSubmit={(initialValues, { setFieldValue }) => {
-
+                onSubmit={(initialValues, actions) => {
                     const values = {
                         depDate: initialValues.depDate,
                         flightNumber: initialValues.flightNumber,
@@ -167,100 +162,110 @@ const LegsAddForm = (props) => {
                         fh: initialValues.fh,
                         fc: initialValues.fc,
                     }
+
                     props.addLeg(props.msn, values)
                     props.addLegForm() // close addForm
+
+                    actions.setSubmitting(false)
                 }}
-
             >
-                {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting,
-                    setFieldValue
-                }) => (
+                {(
+                    { errors,
+                        values,
+                        setFieldValue,
+                        handleSubmit,
+                        isSubmitting
+                    }) => (
                     <Form onSubmit={handleSubmit} >
-
                         <div className={s.leg_block}>
-                            {console.log(touched.to)}
                             <div className={s.leg_block_item}>
-                                <Field className={s.leg_block_date} type='date' id='depDate' name='depDate' placeholder='none' />
-                                {errors.depDate ? <span>{errors.depDate}</span> : null}
+                                <Field className={s.leg_block_date}
+                                    type='date' id='depDate' name='depDate' placeholder='none' />
+                                {errors.depDate ? <span className={s.errorField}>{errors.depDate}</span> : null}
+                            </div>
+
+                            <div className={s.leg_block_item_text}>
+                                <Field className={s.leg_block_text}
+                                    type='text' id='flightNumber' name='flightNumber' placeholder='none' />
+                                {errors.flightNumber ? <span className={s.errorField} >{errors.flightNumber}</span> : null}
                             </div>
                             <div className={s.leg_block_item_text}>
-                                <Field className={s.leg_block_text} type='text' id='flightNumber' name='flightNumber' placeholder='none' />
-                                {errors.flightNumber ? <span>{errors.flightNumber}</span> : null}
-                            </div>
-                            <div className={s.leg_block_item_text}>
-                                <Field className={s.leg_block_text} type='text' id='from' name='from' placeholder='none' />
-                                {errors.from ? <span>{errors.from}</span> : null}
+                                <Field className={s.leg_block_text}
+                                    type='text' id='from' name='from' placeholder='none' />
+                                {errors.from ? <span className={s.errorField} >{errors.from}</span> : null}
                             </div>
                             <div className={s.leg_block_item_text}>
                                 <Field className={s.leg_block_text} type='text' id='to' name='to' placeholder='none' />
-                                {errors.to ? <span>{errors.to}</span> : null}
+                                {errors.to ? <span className={s.errorField} >{errors.to}</span> : null}
                             </div>
                             <div className={s.leg_block_item}>
-                                <Field className={s.leg_block_time} onBlur={e => {
-                                    setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn))
-                                }} type='time' id='blockOff' name='blockOff' placeholder='none' />
-                                {errors.blockTime ? <span>{errors.blockTime}</span> : null}
-                                {errors.blockOff ? <span>{errors.blockOff}</span> : null}
+                                <Field className={s.leg_block_time}
+                                    onChange={(e) => {
+                                        setFieldValue('blockOff', e.target.value)
+                                        setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn))
+                                    }}
+                                    type='time' id='blockOff' name='blockOff' placeholder='none' />
+                                {errors.blockTime ? <span className={s.errorField} >{errors.blockTime}</span> : null}
+                                {errors.blockOff ? <span className={s.errorField} >{errors.blockOff}</span> : null}
                             </div>
                             <div className={s.leg_block_item}>
-                                <Field className={s.leg_block_time} onBlur={e => {
+                                <Field className={s.leg_block_time} onChange={e => {
+                                    setFieldValue('takeOff', e.target.value)
                                     setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing))
                                     setFieldValue('fc', calculateFC(props.aircraftData.FC))
                                     setFieldValue('flightTime', calculateFlightBlockTime(values.depDate, values.takeOff, values.landing))
                                 }} type='time' id='takeOff' name='takeOff' placeholder='none' />
-                                {errors.takeOff ? <span>{errors.takeOff}</span> : null}
-                                {errors.flightTime ? <span>{errors.flightTime}</span> : null}
-                                {errors.fh ? <span>{errors.fh}</span> : null}
-                                {errors.fc ? <span>{errors.fc}</span> : null}
+                                {errors.takeOff ? <span className={s.errorField} >{errors.takeOff}</span> : null}
+                                {errors.flightTime ? <span className={s.errorField} >{errors.flightTime}</span> : null}
+                                {errors.fh ? <span className={s.errorField} >{errors.fh}</span> : null}
+                                {errors.fc ? <span className={s.errorField} >{errors.fc}</span> : null}
                             </div>
                             <div className={s.leg_block_item}>
-                                <Field className={s.leg_block_time} onBlur={e => {
-                                    setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing))
-                                    setFieldValue('fc', calculateFC(props.aircraftData.FC))
-                                    setFieldValue('flightTime', calculateFlightBlockTime(values.depDate, values.takeOff, values.landing))
-                                }} type='time' id='landing' name='landing' placeholder='none' />
-                                {errors.landing ? <span>{errors.landing}</span> : null}
-                                {errors.flightTime ? <span>{errors.flightTime}</span> : null}
+                                <Field className={s.leg_block_time}
+                                    onChange={e => {
+                                        setFieldValue('landing', e.target.value)
+                                        setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing))
+                                        setFieldValue('fc', calculateFC(props.aircraftData.FC))
+                                        setFieldValue('flightTime', calculateFlightBlockTime(values.depDate, values.takeOff, values.landing))
+                                    }}
+                                    type='time' id='landing' name='landing' placeholder='none' />
+                                {errors.landing ? <span className={s.errorField} >{errors.landing}</span> : null}
+                                {errors.flightTime ? <span className={s.errorField} >{errors.flightTime}</span> : null}
                             </div>
                             <div className={s.leg_block_item}>
-                                <Field className={s.leg_block_time} onBlur={e => {
-                                    setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn))
-                                }} type='time' id='blockOn' name='blockOn' placeholder='none' />
-                                {errors.blockOn ? <span>{errors.blockOn}</span> : null}
-                                {errors.blockTime ? <span>{errors.blockTime}</span> : null}
+                                <Field className={s.leg_block_time}
+                                    onChange={e => {
+                                        setFieldValue('blockOn', e.target.value)
+                                        setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn))
+                                    }}
+                                    type='time' id='blockOn' name='blockOn' placeholder='none' />
+                                {errors.blockOn ? <span className={s.errorField} >{errors.blockOn}</span> : null}
+                                {errors.blockTime ? <span className={s.errorField} >{errors.blockTime}</span> : null}
                             </div>
                             <div className={s.leg_block_item_text}>
                                 <Field className={s.leg_block_text}
-                                    //value={calculateFlightBlockTime(values.depDate, values.takeOff, values.landing)} 
-                                    value={values.flightTime}
                                     type='text' id='flightTime' name='flightTime' placeholder='none' disabled />
                             </div>
                             <div className={s.leg_block_item_text}>
-                                <Field className={s.leg_block_text} value={calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn)} type='text' id='blockTime' name='blockTime' placeholder='none' disabled />
+                                <Field className={s.leg_block_text}
+                                    type='text' id='blockTime' name='blockTime' placeholder='none' disabled />
                             </div>
                             <div className={s.leg_block_item_text}>
-                                <Field className={s.leg_block_text} value={calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing)} type='text' id='fh' name='fh' placeholder='none' disabled />
+                                <Field className={s.leg_block_text}
+                                    type='text' id='fh' name='fh' placeholder='none' disabled />
                             </div>
                             <div className={s.leg_block_item_text}>
-                                <Field className={s.leg_block_text} value={calculateFC(props.aircraftData.FC)} type='text' id='fc' name='fc' placeholder='none' disabled />
+                                <Field className={s.leg_block_text}
+                                    type='text' id='fc' name='fc' placeholder='none' disabled />
                             </div>
                         </div>
                         <div className={s.addFormControlPanel}>
-                            <Button type="submit" text='Add' />
+                            <Button isDisabled={isSubmitting} type="submit" text='Add' />
                             <Button event={props.addLegForm} text='Cancel' />
                         </div>
                     </Form>
                 )}
             </Formik>
-
-
         </div >
     )
 }

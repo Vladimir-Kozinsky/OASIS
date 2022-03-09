@@ -17,13 +17,13 @@
     text-align: center;
 }
 
-.leg_block_item span {
+/* .leg_block_item span {
     color: rgb(119, 119, 250);
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-}
-.leg_block_item_text span {
+} */
+.leg_block_item_span {
     color: rgb(119, 119, 250);
     font-size: 13px;
     font-family: 'Roboto', sans-serif;
@@ -86,4 +86,8 @@
 
 .leg_block_date::-webkit-calendar-picker-indicator {
     margin: 0 0;
+}
+
+.errorField {
+    color: rgb(168, 2, 2);
 }

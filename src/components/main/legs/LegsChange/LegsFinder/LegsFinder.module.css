@@ -1,0 +1,20 @@
+.LegsFinderContainer {
+    width: 400px;
+    padding: 10px;
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+.legsFinder_form {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.controlPanel {
+    margin: 30px auto;
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+}

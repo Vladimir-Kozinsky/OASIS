@@ -54,8 +54,6 @@ class Menu extends Component {
         this.props.setAircraft(msn)
     }
 
-
-
     render() {
         return (
             <div className={s.menu}>
