@@ -1,0 +1,51 @@
+.legs_block {
+    border: 1px solid rgb(195, 195, 255);
+}
+
+.leg_block {
+    margin-top: 5px;
+    background-color: rgb(241, 241, 252);
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.leg_block_item {
+    width: 112px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.leg_block_item_text {
+    width: 73px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.leg_block_item span {
+    color: rgb(82, 82, 247);
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block_item_text span {
+    color: rgb(82, 82, 247);
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block.active {
+    border-bottom: 1px solid rgb(195, 195, 255);
+    background-color: white;
+}
+
+.leg_block.active span {
+    color: rgb(119, 119, 250);
+}
+
+.leg_block_item_checkbox {
+    width: 25px;
+    text-align: center;
+}

@@ -1,6 +1,6 @@
 .changeLegsContainer {
-    background-color: rgb(164, 236, 212);
-    
+    padding: 10px;
+    border: 1px solid rgb(195, 195, 255);
 }
 
 .controlPanel {
@@ -9,5 +9,4 @@
     width: 270px;
     display: flex;
     justify-content: space-between;
-    background-color: antiquewhite;
 }

@@ -100,7 +100,7 @@ class Legs extends React.Component {
         return (
             <div className={s.legs}>
                 {this.state.isChangeMode
-                    ? <LegsChange setChangeMode={this.setChangeMode} />
+                    ? <LegsChange legs={this.props.legs} setChangeMode={this.setChangeMode} />
                     : <div className={s.lastLegsContainer}>
                         <h6 className={s.lastLegsContainerTitle}>Last 10 legs</h6>
                         <div className={s.last_legs_block} >
