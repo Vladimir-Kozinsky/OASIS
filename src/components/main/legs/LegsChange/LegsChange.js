@@ -4,18 +4,32 @@ import LegsBlock from './LegsBlock/LegsBlock';
 import s from './LegsChange.module.css'
 import LegsFinder from './LegsFinder/LegsFinder';
 
-const LegsChange = (props) => {
+class LegsChange extends React.Component {
 
-    return (
-        <div className={s.changeLegsContainer}>
-            <LegsFinder />
-            <LegsBlock legs={props.legs} />
-            <div className={s.controlPanel}>
-                <Button event={props.setChangeMode} text="Cancel" />
-                <Button text='Edit' />
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
+    componentDidMount() {
+        if (this.props.aircraft) {
+            this.props.getLegs(this.props.aircraft)
+        }
+        console.log(this.props)
+    }
+
+    render() {
+        return (
+            <div className={s.changeLegsContainer}>
+                <LegsFinder />
+                {/* <LegsBlock legs={this.props.legs.legs} totalPages={this.props.legs.totalPages} /> */}
+                <div className={s.controlPanel}>
+                    <Button event={this.props.setChangeMode} text="Cancel" />
+                    <Button text='Edit' />
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default LegsChange;

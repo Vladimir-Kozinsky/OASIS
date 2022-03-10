@@ -4,24 +4,20 @@ import { useState } from 'react';
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
-const LegsBlock = ({ legs }) => {
+const LegsBlock = ({ legs, totalPages }) => {
 
-    
+
     const [selectedPage, setSelectedPage] = useState(1)
-    const [lastPage, setLastPage] = useState((legs.length % 10) !== 0
-        ? Math.floor(legs.length / 10) + 1
-        : Math.floor(legs.length / 10))
+    const [lastPage, setLastPage] = useState(totalPages)
 
     const onPageChanged = (p) => {
         setSelectedPage(p)
     }
 
     const legsPortion = () => {
-        const startLeg = (selectedPage - 1) * 10
-        const endLeg = startLeg + 10
-        const legsToMap = legs.slice(startLeg, endLeg)
+        
         if (legs) {
-            return legsToMap.map((leg) => {
+            return legs.map((leg) => {
                 return (
                     <div key={leg.Object_Id} className={s.leg_block}>
                         <div className={s.leg_block_item_checkbox}>

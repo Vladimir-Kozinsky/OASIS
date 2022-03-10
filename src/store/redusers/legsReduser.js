@@ -34,9 +34,10 @@ export const getLastLegs = (msn) => {
         dispatch(setLastLegs(legs))
     }
 }
-export const getLegs = (msn, from, to) => {
+export const getLegs = (msn, from, to, selectedPage) => {
     return async (dispatch) => {
-        const legs = await aircraftAPI.getLastLegs(msn, from, to)
+        console.log('get legs req')
+        const legs = await aircraftAPI.getLegs(msn, from, to, selectedPage)
         dispatch(setLegs(legs))
     }
 }

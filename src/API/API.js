@@ -45,12 +45,12 @@ export const aircraftAPI = {
         }).then(response => response.data)
     },
     getLastLegs(msn) {
-        return proxy.get('/aircrafts/aircraft/legs', {
+        return proxy.get('/aircrafts/aircraft/legs/last', {
             params: { msn: msn }
         }).then(response => response.data)
     },
-    getLegs(msn, from, to) {
-        return proxy.get('/aircrafts/aircraft/legs/last', {
+    getLegs(msn, from, to, selectedPage) {
+        return proxy.get('/aircrafts/aircraft/legs', {
             params: {
                 msn: msn,
                 from: from,
