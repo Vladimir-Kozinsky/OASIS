@@ -19,17 +19,17 @@ class Legs extends React.Component {
     }
     componentDidMount() {
         if (this.props.aircraft) {
-            this.props.getLegs(this.props.aircraft)
+            this.props.getLastLegs(this.props.aircraft)
         }
     }
     componentDidUpdate(prevProps) {
         if (this.props.aircraft !== prevProps.aircraft) {
-            this.props.getLegs(this.props.aircraft)
+            this.props.getLastLegs(this.props.aircraft)
         }
     }
     legs() {
-        if (this.props.legs) {
-            return this.props.legs.map((leg) => {
+        if (this.props.lastLegs) {
+            return this.props.lastLegs.map((leg) => {
                 return (
                     <div key={leg.Object_Id} className={s.leg_block}>
                         <div className={s.leg_block_item}>
@@ -100,7 +100,7 @@ class Legs extends React.Component {
         return (
             <div className={s.legs}>
                 {this.state.isChangeMode
-                    ? <LegsChange legs={this.props.legs} setChangeMode={this.setChangeMode} />
+                    ? <LegsChange lastLegs={this.props.legs} setChangeMode={this.setChangeMode} />
                     : <div className={s.lastLegsContainer}>
                         <h6 className={s.lastLegsContainerTitle}>Last 10 legs</h6>
                         <div className={s.last_legs_block} >

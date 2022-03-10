@@ -1,12 +1,27 @@
 import s from './LegsBlock.module.css'
+import Pagenator from './Pagenator/Pagenator';
+import { useState } from 'react';
 
-const LegsBlock = ({legs}) => {
+const leg_block_class = s.leg_block + ' ' + s.active;
 
-    const leg_block_class = s.leg_block + ' ' + s.active;
+const LegsBlock = ({ legs }) => {
+
+    
+    const [selectedPage, setSelectedPage] = useState(1)
+    const [lastPage, setLastPage] = useState((legs.length % 10) !== 0
+        ? Math.floor(legs.length / 10) + 1
+        : Math.floor(legs.length / 10))
+
+    const onPageChanged = (p) => {
+        setSelectedPage(p)
+    }
 
     const legsPortion = () => {
+        const startLeg = (selectedPage - 1) * 10
+        const endLeg = startLeg + 10
+        const legsToMap = legs.slice(startLeg, endLeg)
         if (legs) {
-            return legs.map((leg) => {
+            return legsToMap.map((leg) => {
                 return (
                     <div key={leg.Object_Id} className={s.leg_block}>
                         <div className={s.leg_block_item_checkbox}>
@@ -62,6 +77,12 @@ const LegsBlock = ({legs}) => {
 
     return (
         <div className={s.legs_block} >
+            <Pagenator
+                legs={legs}
+                selectedPage={selectedPage}
+                onPageChanged={onPageChanged}
+                setSelectedPage={setSelectedPage}
+                lastPage={lastPage} />
             <div className={leg_block_class}>
                 <div className={s.leg_block_item_checkbox}>
                     <input className={s.checkbox} type='checkbox' disabled />

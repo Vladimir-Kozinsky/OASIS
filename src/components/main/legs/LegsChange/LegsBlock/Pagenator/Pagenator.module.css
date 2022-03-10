@@ -1,0 +1,21 @@
+.pagenator {
+    text-align: center;
+}
+
+.pageWrapper {
+    display: inline-block;
+    margin: 10px;
+}
+
+.pageNumber {
+    color: blue;
+    margin: 0 5px;
+}
+
+.pageNumber:hover {
+    cursor: pointer;
+}
+
+.selectedPage {
+    color: brown;
+}

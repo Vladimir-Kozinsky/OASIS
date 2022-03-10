@@ -1,16 +1,17 @@
 import { connect } from "react-redux";
-import { getLegs, addLeg } from '../../store/redusers/legsReduser'
+import { getLastLegs, addLeg, getLegs } from '../../store/redusers/legsReduser'
 import Legs from "../main/legs/Legs";
 
 const mapStateToProps = (state) => {
     return {
         aircraft: state.menu.aircraft,
-        legs: state.legs.legs,
+        lastLegs: state.legs.lastLegs,
         aircraftData: state.menu.aircraftData
     }
 }
 
 const LEGS_W = connect(mapStateToProps, { 
+    getLastLegs,
     getLegs, 
     addLeg })(Legs)
 

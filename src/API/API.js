@@ -44,9 +44,18 @@ export const aircraftAPI = {
             params: { msn: msn }
         }).then(response => response.data)
     },
-    getLegs(msn) {
+    getLastLegs(msn) {
         return proxy.get('/aircrafts/aircraft/legs', {
             params: { msn: msn }
+        }).then(response => response.data)
+    },
+    getLegs(msn, from, to) {
+        return proxy.get('/aircrafts/aircraft/legs/last', {
+            params: {
+                msn: msn,
+                from: from,
+                to:to
+            }
         }).then(response => response.data)
     },
     addLeg(msn, leg) {
