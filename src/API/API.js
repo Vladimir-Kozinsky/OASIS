@@ -54,7 +54,8 @@ export const aircraftAPI = {
             params: {
                 msn: msn,
                 from: from,
-                to:to
+                to: to,
+                selectedPage: selectedPage
             }
         }).then(response => response.data)
     },

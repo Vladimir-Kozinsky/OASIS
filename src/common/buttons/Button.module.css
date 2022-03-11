@@ -19,12 +19,16 @@
     transition: .3s;
 }
 
-.button:hover {
+.button:disabled {
+    background-image: linear-gradient(45deg, #c0cefc 0%, #98d8fa 50%, #9bbaf8 100%);
+}
+
+.button:hover:enabled {
     cursor: pointer;
     box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
     background-position: 0 0;
 }
 
-.button:active {
+.button:active:enabled {
     border: 1px solid rgb(119, 119, 250);
 }

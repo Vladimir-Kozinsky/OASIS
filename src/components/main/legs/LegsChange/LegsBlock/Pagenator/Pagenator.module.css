@@ -1,14 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Merriweather:wght@700&family=Poppins&family=Roboto&display=swap');
+
 .pagenator {
     text-align: center;
 }
 
 .pageWrapper {
     display: inline-block;
-    margin: 10px;
+    margin: 10px 0 0 0;
 }
 
 .pageNumber {
-    color: blue;
+    color: rgb(82, 82, 247);
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
     margin: 0 5px;
 }
 
@@ -17,5 +22,48 @@
 }
 
 .selectedPage {
-    color: brown;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.button_wrapper {
+    position: relative;
+    display: inline-block;
+    height: 20px;
+    width: 50px;
+}
+
+.button {
+    position: absolute;
+    left: 4px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    border: none;
+    background-image: linear-gradient(45deg, #7696ff 0%, #98d8fa 50%, #2e73fd 100%);
+    background-position: 100% 0;
+    background-size: 200% 200%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: white;
+    box-shadow: 0 5px 15px 0 rgba(0, 82, 247, 0.35);
+    transition: .3s;
+}
+
+.button:hover:enabled {
+    cursor: pointer;
+    box-shadow: 0 0 0 0 rgba(0, 40, 120, 0);
+    background-position: 0 0;
+}
+
+.button:disabled {
+    background-image: linear-gradient(45deg, #c0cefc 0%, #98d8fa 50%, #9bbaf8 100%);
+}
+
+.prev:active:enabled {
+    border: 1px solid rgb(119, 119, 250);
+}
+
+.next:active:enabled {
+    border: 1px solid rgb(119, 119, 250);
 }

@@ -26,6 +26,7 @@ class Legs extends React.Component {
         if (this.props.aircraft !== prevProps.aircraft) {
             this.props.getLastLegs(this.props.aircraft)
         }
+
     }
     legs() {
         if (this.props.lastLegs) {

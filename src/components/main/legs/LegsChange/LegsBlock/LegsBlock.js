@@ -1,21 +1,13 @@
 import s from './LegsBlock.module.css'
 import Pagenator from './Pagenator/Pagenator';
-import { useState } from 'react';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
-const LegsBlock = ({ legs, totalPages }) => {
-
-
-    const [selectedPage, setSelectedPage] = useState(1)
-    const [lastPage, setLastPage] = useState(totalPages)
-
-    const onPageChanged = (p) => {
-        setSelectedPage(p)
-    }
+const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs }) => {
 
     const legsPortion = () => {
-        
         if (legs) {
             return legs.map((leg) => {
                 return (
@@ -75,52 +67,86 @@ const LegsBlock = ({ legs, totalPages }) => {
         <div className={s.legs_block} >
             <Pagenator
                 legs={legs}
-                selectedPage={selectedPage}
-                onPageChanged={onPageChanged}
-                setSelectedPage={setSelectedPage}
-                lastPage={lastPage} />
-            <div className={leg_block_class}>
-                <div className={s.leg_block_item_checkbox}>
-                    <input className={s.checkbox} type='checkbox' disabled />
-                </div>
-                <div className={s.leg_block_item}>
-                    <span>Dep. Date</span>
-                </div>
-                <div className={s.leg_block_item_text}>
-                    <span>Flight No</span>
-                </div>
-                <div className={s.leg_block_item_text}>
-                    <span>From</span>
-                </div>
-                <div className={s.leg_block_item_text}>
-                    <span>To</span>
-                </div>
-                <div className={s.leg_block_item}>
-                    <span>Block OFF</span>
-                </div>
-                <div className={s.leg_block_item}>
-                    <span>Take OFF</span>
-                </div>
-                <div className={s.leg_block_item}>
-                    <span>Landing</span>
-                </div>
-                <div className={s.leg_block_item}>
-                    <span>Block ON</span>
-                </div>
-                <div className={s.leg_block_item_text}>
-                    <span>Flight Time</span>
-                </div>
-                <div className={s.leg_block_item_text}>
-                    <span>Block Time</span>
-                </div>
-                <div className={s.leg_block_item_text}>
-                    <span>FH</span>
-                </div>
-                <div className={s.leg_block_item_text}>
-                    <span>FC</span>
-                </div>
-            </div>
-            {legsPortion()}
+                pageRequest={pageRequest}
+                totalPages={totalPages}
+                selectedPage={selectedPage} />
+
+
+            <Formik
+                initialValues={{}}
+                validate={values => {
+                    const errors = {};
+                }}
+
+                onSubmit={(values, { setSubmitting }) => {
+
+                }}
+            >
+                {({
+                    values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    isSubmitting,
+                }) => (
+                    <Form className={s.legsFinder_form} onSubmit={handleSubmit}>
+                        <div className={leg_block_class}>
+                            <div className={s.leg_block_item_checkbox}>
+                                <input className={s.checkbox} type='checkbox' disabled />
+                            </div>
+                            <div className={s.leg_block_item}>
+                                <span>Dep. Date</span>
+                            </div>
+                            <div className={s.leg_block_item_text}>
+                                <span>Flight No</span>
+                            </div>
+                            <div className={s.leg_block_item_text}>
+                                <span>From</span>
+                            </div>
+                            <div className={s.leg_block_item_text}>
+                                <span>To</span>
+                            </div>
+                            <div className={s.leg_block_item}>
+                                <span>Block OFF</span>
+                            </div>
+                            <div className={s.leg_block_item}>
+                                <span>Take OFF</span>
+                            </div>
+                            <div className={s.leg_block_item}>
+                                <span>Landing</span>
+                            </div>
+                            <div className={s.leg_block_item}>
+                                <span>Block ON</span>
+                            </div>
+                            <div className={s.leg_block_item_text}>
+                                <span>Flight Time</span>
+                            </div>
+                            <div className={s.leg_block_item_text}>
+                                <span>Block Time</span>
+                            </div>
+                            <div className={s.leg_block_item_text}>
+                                <span>FH</span>
+                            </div>
+                            <div className={s.leg_block_item_text}>
+                                <span>FC</span>
+                            </div>
+                        </div>
+                        {legsPortion()}
+
+
+                    </Form>
+                )}
+            </Formik>
+
+
+
+
+
+
+
+
         </div>
     )
 }
