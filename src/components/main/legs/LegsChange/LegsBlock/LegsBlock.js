@@ -1,11 +1,12 @@
 import s from './LegsBlock.module.css'
 import Pagenator from './Pagenator/Pagenator';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import Button from '../../../../../common/buttons/Button';
 
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
-const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs }) => {
+const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs, setChangeMode, setChangeLegsMode }) => {
 
     const legsPortion = () => {
         if (legs) {
@@ -13,7 +14,7 @@ const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs
                 return (
                     <div key={leg.Object_Id} className={s.leg_block}>
                         <div className={s.leg_block_item_checkbox}>
-                            <input className={s.checkbox} type='checkbox' />
+                            <Field className={s.checkbox} type='checkbox' id={leg._id} name={leg._id} />
                         </div>
                         <div className={s.leg_block_item}>
                             <span>{leg.depDate}</span>
@@ -79,7 +80,10 @@ const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs
                 }}
 
                 onSubmit={(values, { setSubmitting }) => {
-
+                    let valuesArr = Object.keys(values)
+                    setChoosedLegs(valuesArr)
+                    setSubmitting(false)
+                    setChangeLegsMode()
                 }}
             >
                 {({
@@ -135,9 +139,13 @@ const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs
                         </div>
                         {legsPortion()}
 
-
+                        <div className={s.controlPanel}>
+                            <Button event={setChangeMode} text="Cancel" />
+                            <Button text='Edit' type='submit' />
+                        </div>
                     </Form>
                 )}
+
             </Formik>
 
 

@@ -49,3 +49,11 @@
     width: 25px;
     text-align: center;
 }
+
+.controlPanel {
+    margin: 30px auto;
+    bottom: 0px;
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+}
