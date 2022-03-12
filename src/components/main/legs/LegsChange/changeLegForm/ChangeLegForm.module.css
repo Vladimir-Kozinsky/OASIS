@@ -1,0 +1,138 @@
+.leg_block {
+    margin-top: 5px;
+    background-color: rgb(241, 241, 252);
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.leg_block_item {
+    width: 112px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.leg_block_item_time {
+    width: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.leg_block_item_text {
+    width: 73px;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* .leg_block_item span {
+    color: rgb(119, 119, 250);
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+} */
+.leg_block_item_span {
+    color: rgb(119, 119, 250);
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block.active {
+    border-bottom: 1px solid rgb(195, 195, 255);
+    background-color: white;
+}
+
+/* ADD FORM */
+.addForm {
+    margin-top: 20px;
+    border: 1px solid rgb(195, 195, 255);
+}
+
+.leg_block_item input {
+    width: 93%;
+    margin-bottom: 5px;
+}
+
+.leg_block_item_text input {
+    width: 87%;
+    margin-bottom: 5px;
+}
+
+.addFormControlPanel {
+    margin: 20px auto;
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* inputs */
+.leg_block_text {
+    width: 55px;
+}
+
+.leg_block_text[type="text"] {
+    text-align: center;
+    color: rgb(82, 82, 247);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.leg_block_date[type="date"] {
+    color: rgb(82, 82, 247);
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block_time[type="time"] {
+    color: rgb(82, 82, 247);
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block_date::-webkit-calendar-picker-indicator {
+    margin: 0 0;
+}
+
+.errorField {
+    color: rgb(168, 2, 2);
+}
+
+/* BUTTONS */
+.iconBtn {
+    position: relative;
+    width: 25px;
+}
+
+.iconBtn button {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: -0.6px;
+    border: none;
+}
+
+.iconBtn button:hover {
+    cursor: pointer;
+}
+
+.iconBtn button:active {
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    top: -1px;
+    left: 0px;
+}
+
+.delBtn {
+    background: url('./../../../../../common/img/png/delBtnIcon.png') no-repeat;
+    background-size: contain;
+}
+
+.saveBtn {
+    background: url('./../../../../../common/img/png/saveIcon.png') no-repeat;
+    background-size: contain;
+    
+}

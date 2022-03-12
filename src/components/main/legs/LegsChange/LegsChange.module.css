@@ -1,5 +1,25 @@
 .changeLegsContainer {
+    position: relative;
     padding: 10px;
     border: 1px solid rgb(195, 195, 255);
 }
 
+/* CHOOSED LEGS CONTAINER */
+
+/* .choosedLegsContainer{
+    position: absolute;
+    width: 98%;
+    top: 0px;
+    left: 0px;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid rgb(195, 195, 255);
+} */
+
+.controlPanel {
+    margin: 30px auto;
+    bottom: 0px;
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+}

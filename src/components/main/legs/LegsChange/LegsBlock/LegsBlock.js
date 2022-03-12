@@ -71,14 +71,11 @@ const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs
                 pageRequest={pageRequest}
                 totalPages={totalPages}
                 selectedPage={selectedPage} />
-
-
             <Formik
                 initialValues={{}}
                 validate={values => {
                     const errors = {};
                 }}
-
                 onSubmit={(values, { setSubmitting }) => {
                     let valuesArr = Object.keys(values)
                     setChoosedLegs(valuesArr)

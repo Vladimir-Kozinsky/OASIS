@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '../../../../common/buttons/Button';
 import LegsAddForm from '../LegsAddForm/LegsAddForm';
+import ChangeLegForm from './changeLegForm/ChangeLegForm';
 import LegsBlock from './LegsBlock/LegsBlock';
 import s from './LegsChange.module.css'
 import LegsFinder from './LegsFinder/LegsFinder';
@@ -49,7 +50,7 @@ class LegsChange extends React.Component {
             return this.state.choosedLegs.map((el) => {
                 const leg = this.props.legs.legs.find((leg) => leg._id === el)
                 return (
-                    <LegsAddForm leg={leg} />
+                    <ChangeLegForm aircraftData={this.props.aircraftData} leg={leg} />
                 )
             })
         }
@@ -58,7 +59,7 @@ class LegsChange extends React.Component {
         if (this.state.changeMode === false) {
             this.setState({ changeMode: true })
         } else {
-            this.setState({ changeMode: true })
+            this.setState({ changeMode: false })
         }
     }
 
@@ -67,8 +68,11 @@ class LegsChange extends React.Component {
     render() {
         return (
             <div className={s.changeLegsContainer}>
-                <LegsFinder legsRequest={this.legsRequest} aircraft={this.props.aircraft} />
-                {this.props.legs
+                {!this.state.changeMode
+                    ? <LegsFinder legsRequest={this.legsRequest} aircraft={this.props.aircraft} />
+                    : null}
+
+                {this.props.legs && !this.state.changeMode
                     ? <LegsBlock
                         setChangeLegsMode={this.setChangeLegsMode}
                         setChoosedLegs={this.setChoosedLegs}
@@ -79,7 +83,12 @@ class LegsChange extends React.Component {
                         setChangeMode={this.props.setChangeMode} />
                     : null}
                 {this.state.changeMode
-                    ? this.changeLegField()
+                    ? <div className={s.choosedLegsContainer}>
+                        {this.changeLegField()}
+                        <div className={s.controlPanel}>
+                            <Button event={this.setChangeLegsMode} text="Cancel" />
+                        </div>
+                    </div>
                     : null}
             </div>
         )
