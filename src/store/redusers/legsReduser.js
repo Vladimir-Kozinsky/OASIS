@@ -52,4 +52,14 @@ export const addLeg = (msn, leg) => {
     }
 }
 
+export const delLeg = (msn, legId) => {
+    return async (dispatch) => {
+        const data = await aircraftAPI.delLeg(msn, legId)
+        if (data.resultCode == 1) {
+           // dispatch(setLastLegs(data.legs))
+           // dispatch(getAircraftData(msn))
+        }
+    }
+}
+
 export default legsReduser

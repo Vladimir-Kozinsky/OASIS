@@ -100,14 +100,14 @@ const LegsAddForm = (props) => {
             </div>
             <Formik
                 initialValues={{
-                    depDate: '2022-03-02',
-                    flightNumber: 'txc2345',
+                    depDate: '',
+                    flightNumber: '',
                     from: 'EDDT',
                     to: 'EDDE',
-                    blockOff: '22:44',
-                    takeOff: '22:44',
-                    landing: '22:44',
-                    blockOn: '22:44',
+                    blockOff: '',
+                    takeOff: '',
+                    landing: '',
+                    blockOn: '',
                     flightTime: '0',
                     blockTime: '0',
                     fh: '0',
@@ -202,7 +202,7 @@ const LegsAddForm = (props) => {
                                 <Field className={s.leg_block_time}
                                     onChange={(e) => {
                                         setFieldValue('blockOff', e.target.value)
-                                        setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn))
+                                        setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, e.target.value, values.blockOn))
                                     }}
                                     type='time' id='blockOff' name='blockOff' placeholder='none' />
                                 {errors.blockTime ? <span className={s.errorField} >{errors.blockTime}</span> : null}
@@ -211,9 +211,9 @@ const LegsAddForm = (props) => {
                             <div className={s.leg_block_item}>
                                 <Field className={s.leg_block_time} onChange={e => {
                                     setFieldValue('takeOff', e.target.value)
-                                    setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing))
+                                    setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate,  e.target.value, values.landing))
                                     setFieldValue('fc', calculateFC(props.aircraftData.FC))
-                                    setFieldValue('flightTime', calculateFlightBlockTime(values.depDate, values.takeOff, values.landing))
+                                    setFieldValue('flightTime', calculateFlightBlockTime(values.depDate,  e.target.value, values.landing))
                                 }} type='time' id='takeOff' name='takeOff' placeholder='none' />
                                 {errors.takeOff ? <span className={s.errorField} >{errors.takeOff}</span> : null}
                                 {errors.flightTime ? <span className={s.errorField} >{errors.flightTime}</span> : null}
@@ -224,9 +224,9 @@ const LegsAddForm = (props) => {
                                 <Field className={s.leg_block_time}
                                     onChange={e => {
                                         setFieldValue('landing', e.target.value)
-                                        setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, values.landing))
+                                        setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, values.takeOff, e.target.value))
                                         setFieldValue('fc', calculateFC(props.aircraftData.FC))
-                                        setFieldValue('flightTime', calculateFlightBlockTime(values.depDate, values.takeOff, values.landing))
+                                        setFieldValue('flightTime', calculateFlightBlockTime(values.depDate, values.takeOff, e.target.value))
                                     }}
                                     type='time' id='landing' name='landing' placeholder='none' />
                                 {errors.landing ? <span className={s.errorField} >{errors.landing}</span> : null}
@@ -236,7 +236,7 @@ const LegsAddForm = (props) => {
                                 <Field className={s.leg_block_time}
                                     onChange={e => {
                                         setFieldValue('blockOn', e.target.value)
-                                        setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, values.blockOff, values.blockOn))
+                                        setFieldValue('blockTime', calculateFlightBlockTime(values.depDate, values.blockOff, e.target.value))
                                     }}
                                     type='time' id='blockOn' name='blockOn' placeholder='none' />
                                 {errors.blockOn ? <span className={s.errorField} >{errors.blockOn}</span> : null}

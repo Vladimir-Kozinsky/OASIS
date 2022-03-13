@@ -65,6 +65,10 @@ export const aircraftAPI = {
 
     addAircraft(msn, FH, FC, leg) {
         return proxy.post('/aircrafts/add', aircraftsData[0]).then(response => response.data)
+    },
+
+    delLeg(msn, legId) {
+        return proxy.post('/aircrafts/legs/del', { msn, legId }).then(response => response.data)
     }
 }
 
