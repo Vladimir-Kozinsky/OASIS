@@ -78,8 +78,8 @@ const ChangeLegForm = ({ leg, aircraft, delLeg }) => {
     }
 
     const deleteLeg = () => {
-        console.log(aircraft, leg._id)
-        delLeg(aircraft, leg._id)
+        console.log(aircraft, leg.id)
+        delLeg(aircraft, leg.id)
     }
 
 

@@ -1,7 +1,7 @@
 import Button from '../../../../common/buttons/Button'
 import s from './LegsAddForm.module.css'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
-import { addLeg } from '../../../../store/redusers/legsReduser';
+import legsReduser, { addLeg } from '../../../../store/redusers/legsReduser';
 import { useState } from 'react';
 
 
@@ -100,14 +100,14 @@ const LegsAddForm = (props) => {
             </div>
             <Formik
                 initialValues={{
-                    depDate: '',
-                    flightNumber: '',
+                    depDate: '2022-03-02',
+                    flightNumber: 'dsfs',
                     from: 'EDDT',
                     to: 'EDDE',
-                    blockOff: '',
-                    takeOff: '',
-                    landing: '',
-                    blockOn: '',
+                    blockOff: '20:22',
+                    takeOff: '20:22',
+                    landing: '20:25',
+                    blockOn: '20:27',
                     flightTime: '0',
                     blockTime: '0',
                     fh: '0',
@@ -149,6 +149,7 @@ const LegsAddForm = (props) => {
 
                 onSubmit={(initialValues, actions) => {
                     const values = {
+                        id: initialValues.depDate + initialValues.takeOff,
                         depDate: initialValues.depDate,
                         flightNumber: initialValues.flightNumber,
                         from: initialValues.from,
@@ -211,9 +212,9 @@ const LegsAddForm = (props) => {
                             <div className={s.leg_block_item}>
                                 <Field className={s.leg_block_time} onChange={e => {
                                     setFieldValue('takeOff', e.target.value)
-                                    setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate,  e.target.value, values.landing))
+                                    setFieldValue('fh', calculateFH(props.aircraftData.FH, values.depDate, e.target.value, values.landing))
                                     setFieldValue('fc', calculateFC(props.aircraftData.FC))
-                                    setFieldValue('flightTime', calculateFlightBlockTime(values.depDate,  e.target.value, values.landing))
+                                    setFieldValue('flightTime', calculateFlightBlockTime(values.depDate, e.target.value, values.landing))
                                 }} type='time' id='takeOff' name='takeOff' placeholder='none' />
                                 {errors.takeOff ? <span className={s.errorField} >{errors.takeOff}</span> : null}
                                 {errors.flightTime ? <span className={s.errorField} >{errors.flightTime}</span> : null}
