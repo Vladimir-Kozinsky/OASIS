@@ -29,9 +29,7 @@ const time_subtraction = (start_date, start_time, end_time) => {
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
-const ChangeLegForm = ({ leg, aircraft, delLeg }) => {
-
-
+const ChangeLegForm = ({ leg, aircraft, delLeg, getAircraftData }) => {
 
     const prevLegFH = () => {   //вычесть FH до этого лега
         const fh_to_min = (fh) => {
@@ -46,8 +44,6 @@ const ChangeLegForm = ({ leg, aircraft, delLeg }) => {
 
         return final_fh
     }
-
-    console.log(prevLegFH())
 
     const calculateFC = (fc) => {
         return `${+fc + 1}`
@@ -78,8 +74,8 @@ const ChangeLegForm = ({ leg, aircraft, delLeg }) => {
     }
 
     const deleteLeg = () => {
-        console.log(aircraft, leg.id)
         delLeg(aircraft, leg.id)
+        getAircraftData(aircraft)
     }
 
 

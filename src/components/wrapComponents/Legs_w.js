@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import { getLastLegs, addLeg, getLegs, delLeg } from '../../store/redusers/legsReduser'
+import { getAircraftData } from '../../store/redusers/menuReduser'
 import Legs from "../main/legs/Legs";
 
 const mapStateToProps = (state) => {
@@ -15,7 +16,8 @@ const LEGS_W = connect(mapStateToProps, {
     getLastLegs,
     getLegs,
     addLeg,
-    delLeg
+    delLeg,
+    getAircraftData
 })(Legs)
 
 export default LEGS_W

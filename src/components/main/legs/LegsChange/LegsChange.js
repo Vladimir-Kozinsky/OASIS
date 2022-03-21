@@ -50,7 +50,11 @@ class LegsChange extends React.Component {
             return this.state.choosedLegs.map((el) => {
                 const leg = this.props.legs.legs.find((leg) => leg._id === el)
                 return (
-                    <ChangeLegForm aircraft={this.props.aircraft} leg={leg} delLeg={this.props.delLeg} />
+                    <ChangeLegForm
+                        aircraft={this.props.aircraft}
+                        leg={leg}
+                        delLeg={this.props.delLeg}
+                        getAircraftData={this.props.getAircraftData} />
                 )
             })
         }
