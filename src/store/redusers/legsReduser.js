@@ -56,8 +56,16 @@ export const delLeg = (msn, legId) => {
     return async (dispatch) => {
         const data = await aircraftAPI.delLeg(msn, legId)
         if (data.resultCode == 1) {
-           // dispatch(setLastLegs(data.legs))
-           // dispatch(getAircraftData(msn))
+            dispatch(getAircraftData(msn))
+        }
+    }
+}
+
+export const updateLeg = (msn, leg) => {
+    return async (dispatch) => {
+        const data = await aircraftAPI.updateLeg(msn, leg)
+        if (data.resultCode == 1) {
+            dispatch(getAircraftData(msn))
         }
     }
 }

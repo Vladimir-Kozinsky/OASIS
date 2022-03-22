@@ -29,7 +29,7 @@ const time_subtraction = (start_date, start_time, end_time) => {
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
-const ChangeLegForm = ({ leg, aircraft, delLeg, getAircraftData }) => {
+const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg }) => {
 
     const prevLegFH = () => {   //вычесть FH до этого лега
         const fh_to_min = (fh) => {
@@ -75,13 +75,12 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, getAircraftData }) => {
 
     const deleteLeg = () => {
         delLeg(aircraft, leg.id)
-        getAircraftData(aircraft)
     }
 
 
     return (
         <div className={s.addForm}>
-            <div className={leg_block_class}>
+            {leg ? <div className={leg_block_class}>
                 <div className={s.leg_block_item}>
                     <span className={s.leg_block_item_span} >Dep. Date</span>
                 </div>
@@ -123,7 +122,9 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, getAircraftData }) => {
                 <div className={s.iconBtn}>
                 </div>
             </div>
-            <Formik
+                : <div>leg deleted</div>
+            }
+            {leg && <Formik
                 initialValues={{
                     depDate: leg.depDate,
                     flightNumber: leg.flightNumber,
@@ -174,6 +175,7 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, getAircraftData }) => {
 
                 onSubmit={(initialValues, actions) => {
                     const values = {
+                        id: leg.id,
                         depDate: initialValues.depDate,
                         flightNumber: initialValues.flightNumber,
                         from: initialValues.from,
@@ -188,9 +190,8 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, getAircraftData }) => {
                         fc: initialValues.fc,
                     }
 
-                    // props.addLeg(props.msn, values)
-                    // props.addLegForm() // close addForm
-                    console.log(initialValues)
+                    updateLeg(aircraft, values)
+                    console.log(values)
                     actions.setSubmitting(false)
                 }}
             >
@@ -296,7 +297,7 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, getAircraftData }) => {
                         </div> */}
                     </Form>
                 )}
-            </Formik>
+            </Formik>}
         </div >
     )
 }

@@ -14,7 +14,8 @@ class LegsChange extends React.Component {
             changeMode: false,
             from: null,
             to: null,
-            choosedLegs: null
+            choosedLegs: null,
+            aircraftData: {}
         }
 
         this.legsRequest = this.legsRequest.bind(this);
@@ -27,6 +28,12 @@ class LegsChange extends React.Component {
     componentDidMount() {
         if (this.props.aircraft) {
             this.props.getLegs(this.props.aircraft)
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.aircraftData !== prevProps.aircraftData) {
+            this.props.getLegs(this.props.aircraft, this.state.from, this.state.to)
         }
     }
 
@@ -54,7 +61,8 @@ class LegsChange extends React.Component {
                         aircraft={this.props.aircraft}
                         leg={leg}
                         delLeg={this.props.delLeg}
-                        getAircraftData={this.props.getAircraftData} />
+                        getAircraftData={this.props.getAircraftData}
+                        updateLeg={this.props.updateLeg} />
                 )
             })
         }

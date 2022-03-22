@@ -166,7 +166,6 @@ const LegsAddForm = (props) => {
 
                     props.addLeg(props.msn, values)
                     props.addLegForm() // close addForm
-
                     actions.setSubmitting(false)
                 }}
             >
