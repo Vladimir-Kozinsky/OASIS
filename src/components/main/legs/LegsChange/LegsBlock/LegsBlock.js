@@ -14,7 +14,7 @@ const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs
                 return (
                     <div key={leg.Object_Id} className={s.leg_block}>
                         <div className={s.leg_block_item_checkbox}>
-                            <Field className={s.checkbox} type='checkbox' id={leg._id} name={leg._id} />
+                            <Field className={s.checkbox} type='checkbox' id={leg.id} name={leg.id} />
                         </div>
                         <div className={s.leg_block_item}>
                             <span>{leg.depDate}</span>
@@ -77,6 +77,7 @@ const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs
                     const errors = {};
                 }}
                 onSubmit={(values, { setSubmitting }) => {
+                    console.log(values)
                     let valuesArr = Object.keys(values)
                     setChoosedLegs(valuesArr)
                     setSubmitting(false)
@@ -90,9 +91,9 @@ const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs
                     handleChange,
                     handleBlur,
                     handleSubmit,
-                    isSubmitting,
+                    isSubmitting
                 }) => (
-                    <Form className={s.legsFinder_form} onSubmit={handleSubmit}>
+                    <Form className={s.legsFinder_form} onSubmit={handleSubmit} >
                         <div className={leg_block_class}>
                             <div className={s.leg_block_item_checkbox}>
                                 <input className={s.checkbox} type='checkbox' disabled />

@@ -52,17 +52,19 @@ class LegsChange extends React.Component {
     }
 
     changeLegField() {
-        console.log(this.state.choosedLegs)
         if (this.state.choosedLegs) {
             return this.state.choosedLegs.map((el) => {
-                const leg = this.props.legs.legs.find((leg) => leg._id === el)
+                const leg = this.props.legs.legs.find((leg) => leg.id === el)
+                console.log(leg)
                 return (
                     <ChangeLegForm
                         aircraft={this.props.aircraft}
                         leg={leg}
                         delLeg={this.props.delLeg}
                         getAircraftData={this.props.getAircraftData}
-                        updateLeg={this.props.updateLeg} />
+                        updateLeg={this.props.updateLeg}
+                        choosedLegs={this.state.choosedLegs}
+                    />
                 )
             })
         }
@@ -84,7 +86,8 @@ class LegsChange extends React.Component {
                     ? <LegsFinder legsRequest={this.legsRequest} aircraft={this.props.aircraft} />
                     : null}
 
-                {this.props.legs && !this.state.changeMode
+                {this.props.legs 
+              //  && !this.state.changeMode
                     ? <LegsBlock
                         setChangeLegsMode={this.setChangeLegsMode}
                         setChoosedLegs={this.setChoosedLegs}

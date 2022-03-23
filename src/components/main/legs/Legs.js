@@ -32,7 +32,7 @@ class Legs extends React.Component {
         if (this.props.lastLegs) {
             return this.props.lastLegs.map((leg) => {
                 return (
-                    <div key={leg.Object_Id} className={s.leg_block}>
+                    <div key={leg.id} className={s.leg_block}>
                         <div className={s.leg_block_item}>
                             <span>{leg.depDate}</span>
                         </div>

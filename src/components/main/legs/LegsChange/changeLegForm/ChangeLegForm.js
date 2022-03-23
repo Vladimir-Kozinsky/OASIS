@@ -29,7 +29,7 @@ const time_subtraction = (start_date, start_time, end_time) => {
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
-const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg }) => {
+const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs }) => {
 
     const prevLegFH = () => {   //вычесть FH до этого лега
         const fh_to_min = (fh) => {
@@ -191,8 +191,8 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg }) => {
                     }
 
                     updateLeg(aircraft, values)
-                    console.log(values)
                     actions.setSubmitting(false)
+                    console.log('chosed legs', choosedLegs)
                 }}
             >
                 {(
@@ -285,16 +285,12 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg }) => {
                                     type='text' id='fc' name='fc' placeholder='none' disabled />
                             </div>
                             <div className={s.iconBtn}>
-                                <button className={s.delBtn} onClick={deleteLeg} ></button>
+                                <button className={s.delBtn} onClick={deleteLeg} type='button' ></button>
                             </div>
                             <div className={s.iconBtn}>
                                 <button className={s.saveBtn} type="submit"></button>
                             </div>
                         </div>
-                        {/* <div className={s.addFormControlPanel}>
-                            <Button isDisabled={isSubmitting} type="submit" text='Add' />
-                            <Button event={props.addLegForm} text='Cancel' />
-                        </div> */}
                     </Form>
                 )}
             </Formik>}
