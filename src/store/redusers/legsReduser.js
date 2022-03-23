@@ -3,7 +3,8 @@ import { getAircraftData } from './menuReduser'
 
 const defaultState = {
     lastLegs: null,
-    legs: null
+    legs: null,
+    updateLegMes: null
 }
 
 const legsReduser = (state = defaultState, action) => {
@@ -18,6 +19,11 @@ const legsReduser = (state = defaultState, action) => {
                 ...state,
                 legs: action.payload
             }
+        case 'SET_UPDATE_LEG_MES':
+            return {
+                ...state,
+                updateLegMes: action.payload
+            }
         default:
             return state
     }
@@ -25,6 +31,7 @@ const legsReduser = (state = defaultState, action) => {
 
 const setLastLegs = (legs) => ({ type: 'SET_LAST_LEGS', payload: legs })
 const setLegs = (legs) => ({ type: 'SET_LEGS', payload: legs })
+const setUpdateLegMes = (mes) => ({ type: 'SET_UPDATE_LEG_MES', payload: mes })
 
 
 
@@ -66,6 +73,15 @@ export const updateLeg = (msn, leg) => {
         const data = await aircraftAPI.updateLeg(msn, leg)
         if (data.resultCode == 1) {
             dispatch(getAircraftData(msn))
+            dispatch(setUpdateLegMes('Leg was updated'))
+            setTimeout(() => {
+                dispatch(setUpdateLegMes(null))
+            }, 3000);
+        } else {
+            dispatch(setUpdateLegMes('Leg was not updated'))
+            setTimeout(() => {
+                dispatch(setUpdateLegMes(null))
+            }, 3000);
         }
     }
 }

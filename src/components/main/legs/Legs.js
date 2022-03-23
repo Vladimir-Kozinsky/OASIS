@@ -102,6 +102,7 @@ class Legs extends React.Component {
             <div className={s.legs}>
                 {this.state.isChangeMode
                     ? <LegsChange
+                        updateLegMes={this.props.updateLegMes}
                         updateLeg={this.props.updateLeg}
                         aircraftData={this.props.aircraftData}
                         getAircraftData={this.props.getAircraftData}

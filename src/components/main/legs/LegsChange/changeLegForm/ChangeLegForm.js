@@ -1,6 +1,7 @@
 
 import s from './ChangeLegForm.module.css'
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import Message from '../../../../../common/message/Message';
 
 
 const time_to_arr = (time) => {
@@ -29,7 +30,7 @@ const time_subtraction = (start_date, start_time, end_time) => {
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
-const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs }) => {
+const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs, updateLegMes }) => {
 
     const prevLegFH = () => {   //вычесть FH до этого лега
         const fh_to_min = (fh) => {
@@ -80,7 +81,7 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs }) => {
 
     return (
         <div className={s.addForm}>
-            {leg ? <div className={leg_block_class}>
+            <div className={leg_block_class}>
                 <div className={s.leg_block_item}>
                     <span className={s.leg_block_item_span} >Dep. Date</span>
                 </div>
@@ -122,9 +123,7 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs }) => {
                 <div className={s.iconBtn}>
                 </div>
             </div>
-                : <div>leg deleted</div>
-            }
-            {leg && <Formik
+            <Formik
                 initialValues={{
                     depDate: leg.depDate,
                     flightNumber: leg.flightNumber,
@@ -293,7 +292,8 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs }) => {
                         </div>
                     </Form>
                 )}
-            </Formik>}
+            </Formik>
+            {updateLegMes && <Message message={updateLegMes} />}
         </div >
     )
 }

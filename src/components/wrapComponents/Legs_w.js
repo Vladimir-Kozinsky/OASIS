@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
         aircraft: state.menu.aircraft,
         lastLegs: state.legs.lastLegs,
         legs: state.legs.legs,
+        updateLegMes: state.legs.updateLegMes,
         aircraftData: state.menu.aircraftData
     }
 }

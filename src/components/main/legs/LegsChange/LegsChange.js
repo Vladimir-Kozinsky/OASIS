@@ -58,6 +58,7 @@ class LegsChange extends React.Component {
                 console.log(leg)
                 return (
                     <ChangeLegForm
+                        updateLegMes={this.props.updateLegMes}
                         aircraft={this.props.aircraft}
                         leg={leg}
                         delLeg={this.props.delLeg}
@@ -76,9 +77,6 @@ class LegsChange extends React.Component {
             this.setState({ changeMode: false })
         }
     }
-
-
-
     render() {
         return (
             <div className={s.changeLegsContainer}>
@@ -86,8 +84,8 @@ class LegsChange extends React.Component {
                     ? <LegsFinder legsRequest={this.legsRequest} aircraft={this.props.aircraft} />
                     : null}
 
-                {this.props.legs 
-              //  && !this.state.changeMode
+                {this.props.legs
+                    //  && !this.state.changeMode
                     ? <LegsBlock
                         setChangeLegsMode={this.setChangeLegsMode}
                         setChoosedLegs={this.setChoosedLegs}
