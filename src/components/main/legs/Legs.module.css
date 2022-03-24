@@ -85,7 +85,7 @@
 
 .controlPanel {
     margin: 30px auto;
-    width: 270px;
+    width: 420px;
     display: flex;
     justify-content: space-between;
 }

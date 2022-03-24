@@ -136,14 +136,12 @@ const LegsBlock = ({ legs, totalPages, pageRequest, selectedPage, setChoosedLegs
                             </div>
                         </div>
                         {legsPortion()}
-
                         <div className={s.controlPanel}>
                             <Button event={setChangeMode} text="Cancel" />
                             <Button text='Edit' type='submit' />
                         </div>
                     </Form>
                 )}
-
             </Formik>
 
 

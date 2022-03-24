@@ -30,7 +30,7 @@ const time_subtraction = (start_date, start_time, end_time) => {
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
-const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs, updateLegMes }) => {
+const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs, updateLegMes, setChangeLegsMode }) => {
 
     const prevLegFH = () => {   //вычесть FH до этого лега
         const fh_to_min = (fh) => {
@@ -78,10 +78,9 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs, updateLe
         delLeg(aircraft, leg.id)
     }
 
-
     return (
         <div className={s.addForm}>
-            <div className={leg_block_class}>
+            {leg && <div className={leg_block_class}>
                 <div className={s.leg_block_item}>
                     <span className={s.leg_block_item_span} >Dep. Date</span>
                 </div>
@@ -122,8 +121,8 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs, updateLe
                 </div>
                 <div className={s.iconBtn}>
                 </div>
-            </div>
-            <Formik
+            </div>}
+            {leg && <Formik
                 initialValues={{
                     depDate: leg.depDate,
                     flightNumber: leg.flightNumber,
@@ -191,7 +190,6 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs, updateLe
 
                     updateLeg(aircraft, values)
                     actions.setSubmitting(false)
-                    console.log('chosed legs', choosedLegs)
                 }}
             >
                 {(
@@ -292,8 +290,8 @@ const ChangeLegForm = ({ leg, aircraft, delLeg, updateLeg, choosedLegs, updateLe
                         </div>
                     </Form>
                 )}
-            </Formik>
-            {updateLegMes && <Message message={updateLegMes} />}
+            </Formik>}
+            {updateLegMes && <Message message={updateLegMes.message} theme={updateLegMes.theme} />}
         </div >
     )
 }

@@ -1,0 +1,8 @@
+/* CONTROL PANEL */
+
+.controlPanel {
+    margin: 30px auto;
+    width: 270px;
+    display: flex;
+    justify-content: space-between;
+}

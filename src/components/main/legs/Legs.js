@@ -3,6 +3,7 @@ import Button from '../../../common/buttons/Button';
 import s from './Legs.module.css'
 import LegsAddForm from './LegsAddForm/LegsAddForm';
 import LegsChange from './LegsChange/LegsChange';
+import LegsCreateReport from './LegsCreateReport/LegsCreateReport';
 
 const leg_block_class = s.leg_block + ' ' + s.active;
 
@@ -11,11 +12,13 @@ class Legs extends React.Component {
         super(props);
         this.state = {
             isAddForm: false,
-            isChangeMode: false
+            isChangeMode: false,
+            isCreteReportMode: false
         }
         this.onChange = this.legs.bind(this);
         this.setChangeMode = this.setChangeMode.bind(this);
         this.addLegForm = this.addLegForm.bind(this);
+        this.setCreteReportMode = this.setCreteReportMode.bind(this);
     }
     componentDidMount() {
         if (this.props.aircraft) {
@@ -24,6 +27,10 @@ class Legs extends React.Component {
     }
     componentDidUpdate(prevProps) {
         if (this.props.aircraft !== prevProps.aircraft) {
+            this.props.getLastLegs(this.props.aircraft)
+        }
+
+        if (this.props.aircraftData !== prevProps.aircraftData) {
             this.props.getLastLegs(this.props.aircraft)
         }
 
@@ -89,6 +96,14 @@ class Legs extends React.Component {
         }
     }
 
+    setCreteReportMode() {
+        if (this.state.isCreteReportMode) {
+            this.setState({ isCreteReportMode: false });
+        } else {
+            this.setState({ isCreteReportMode: true });
+        }
+    }
+
     addLegForm() {
         if (this.state.isAddForm) {
             this.setState({ isAddForm: false });
@@ -100,18 +115,19 @@ class Legs extends React.Component {
     render() {
         return (
             <div className={s.legs}>
-                {this.state.isChangeMode
-                    ? <LegsChange
-                        updateLegMes={this.props.updateLegMes}
-                        updateLeg={this.props.updateLeg}
-                        aircraftData={this.props.aircraftData}
-                        getAircraftData={this.props.getAircraftData}
-                        aircraft={this.props.aircraft}
-                        getLegs={this.props.getLegs}
-                        legs={this.props.legs}
-                        setChangeMode={this.setChangeMode}
-                        delLeg={this.props.delLeg} />
-                    : <div className={s.lastLegsContainer}>
+                {this.state.isChangeMode && <LegsChange
+                    updateLegMes={this.props.updateLegMes}
+                    updateLeg={this.props.updateLeg}
+                    aircraftData={this.props.aircraftData}
+                    getAircraftData={this.props.getAircraftData}
+                    aircraft={this.props.aircraft}
+                    getLegs={this.props.getLegs}
+                    legs={this.props.legs}
+                    setChangeMode={this.setChangeMode}
+                    delLeg={this.props.delLeg} />}
+                {!this.state.isChangeMode
+                    && !this.state.isCreteReportMode
+                    && <div className={s.lastLegsContainer}>
                         <h6 className={s.lastLegsContainerTitle}>Last 10 legs</h6>
                         <div className={s.last_legs_block} >
                             <div className={leg_block_class}>
@@ -166,10 +182,13 @@ class Legs extends React.Component {
                             ? <div className={s.controlPanel}>
                                 <Button event={this.addLegForm} text='Add Leg' />
                                 <Button event={this.setChangeMode} text="Edit Mode" />
+                                <Button event={this.setCreteReportMode} text="Create report" />
                             </div>
                             : null
                         }
                     </div>}
+                {this.state.isCreteReportMode
+                    && <LegsCreateReport setCreteReportMode={this.setCreteReportMode} />}
 
             </div>
         )

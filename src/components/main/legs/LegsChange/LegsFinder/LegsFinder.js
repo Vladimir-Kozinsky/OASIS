@@ -10,7 +10,7 @@ const LegsFinder = ({ legsRequest }) => {
     return (
         <div className={s.LegsFinderContainer}>
             <Formik
-                initialValues={{ from: '2022-03-02', to: '2022-03-03' }}
+                initialValues={{ from: '2022-03-01', to: '2022-03-25' }}
                 validate={values => {
                     const errors = {};
                     if (!values.from) {

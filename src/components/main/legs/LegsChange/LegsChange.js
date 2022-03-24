@@ -55,9 +55,9 @@ class LegsChange extends React.Component {
         if (this.state.choosedLegs) {
             return this.state.choosedLegs.map((el) => {
                 const leg = this.props.legs.legs.find((leg) => leg.id === el)
-                console.log(leg)
                 return (
                     <ChangeLegForm
+                        setChangeLegsMode={this.setChangeLegsMode}
                         updateLegMes={this.props.updateLegMes}
                         aircraft={this.props.aircraft}
                         leg={leg}
@@ -84,8 +84,7 @@ class LegsChange extends React.Component {
                     ? <LegsFinder legsRequest={this.legsRequest} aircraft={this.props.aircraft} />
                     : null}
 
-                {this.props.legs
-                    //  && !this.state.changeMode
+                {this.props.legs && !this.state.changeMode
                     ? <LegsBlock
                         setChangeLegsMode={this.setChangeLegsMode}
                         setChoosedLegs={this.setChoosedLegs}

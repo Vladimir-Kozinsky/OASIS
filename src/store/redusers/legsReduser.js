@@ -64,6 +64,16 @@ export const delLeg = (msn, legId) => {
         const data = await aircraftAPI.delLeg(msn, legId)
         if (data.resultCode == 1) {
             dispatch(getAircraftData(msn))
+            dispatch(setUpdateLegMes({ message: 'Leg was deleted', theme: 'green' }))
+            setTimeout(() => {
+                dispatch(setUpdateLegMes(null))
+            }, 2000);
+        } else {
+            dispatch(setUpdateLegMes({ message: 'Leg was not deleted', theme: 'red' }))
+            setTimeout(() => {
+                dispatch(setUpdateLegMes(null))
+            }, 2000);
+
         }
     }
 }
@@ -73,15 +83,15 @@ export const updateLeg = (msn, leg) => {
         const data = await aircraftAPI.updateLeg(msn, leg)
         if (data.resultCode == 1) {
             dispatch(getAircraftData(msn))
-            dispatch(setUpdateLegMes('Leg was updated'))
+            dispatch(setUpdateLegMes({ message: 'Leg was updated', theme: 'green' }))
             setTimeout(() => {
                 dispatch(setUpdateLegMes(null))
-            }, 3000);
+            }, 2000);
         } else {
-            dispatch(setUpdateLegMes('Leg was not updated'))
+            dispatch(setUpdateLegMes({ message: 'Leg was not updated', theme: 'red' }))
             setTimeout(() => {
                 dispatch(setUpdateLegMes(null))
-            }, 3000);
+            }, 2000);
         }
     }
 }
