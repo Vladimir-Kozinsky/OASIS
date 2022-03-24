@@ -1,3 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Merriweather:wght@700&family=Poppins&family=Roboto&display=swap');
+
+.legs {
+    padding: 10px;
+    background-color: azure;
+}
+
+.lastLegsContainer {
+    border: 1px solid rgb(195, 195, 255);
+    padding: 10px;
+}
+
+.lastLegsContainerTitle {
+    color: rgb(119, 119, 250);
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    margin: 5px 0 0 0;
+}
+
+.last_legs_block {
+    border: 1px solid rgb(195, 195, 255);
+    min-height: 40px;
+    padding: 5px;
+
+}
+
+.leg_block {
+    margin-top: 5px;
+    background-color: rgb(241, 241, 252);
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.leg_block_item {
+    width: 112px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.leg_block_item_text {
+    width: 73px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.leg_block_item span {
+    color: rgb(82, 82, 247);
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block_item_text span {
+    color: rgb(82, 82, 247);
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.leg_block.active {
+    border-bottom: 1px solid rgb(195, 195, 255);
+    background-color: white;
+}
+
+.leg_block.active span {
+    color: rgb(119, 119, 250);
+}
+
+.legsMes_container {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.legsMes {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(160, 160, 250);
+}
+
 /* CONTROL PANEL */
 
 .controlPanel {

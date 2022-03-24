@@ -188,7 +188,11 @@ class Legs extends React.Component {
                         }
                     </div>}
                 {this.state.isCreteReportMode
-                    && <LegsCreateReport setCreteReportMode={this.setCreteReportMode} />}
+                    && <LegsCreateReport
+                        setCreteReportMode={this.setCreteReportMode}
+                        aircraft={this.props.aircraft}
+                        getLegs={this.props.getLegs}
+                        legs={this.props.legs} />}
 
             </div>
         )
