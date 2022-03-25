@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Merriweather:wght@700&family=Poppins&family=Roboto&display=swap');
 
+
+
 .legs {
     padding: 10px;
     background-color: azure;
@@ -18,10 +20,12 @@
     margin: 5px 0 0 0;
 }
 
-.last_legs_block {
+.legs_block {
     border: 1px solid rgb(195, 195, 255);
     min-height: 40px;
     padding: 5px;
+    max-height: 525px;
+    overflow-y: scroll;
 
 }
 
@@ -88,4 +92,16 @@
     width: 270px;
     display: flex;
     justify-content: space-between;
+}
+
+@media print {
+    .legs_block {
+        overflow-y: visible;
+        border: none;
+    }
+
+    .leg_block_item span, .leg_block_item_text span {
+        color: black;
+        font-weight: 400;
+    }
 }
