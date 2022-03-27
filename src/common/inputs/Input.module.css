@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Merriweather:wght@700&family=Poppins&family=Roboto&display=swap');
+
+.input {
+    width: 220px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid rgb(195, 195, 255);
+
+}
+
+.input:focus {
+    outline: none;
+    border: 2px solid rgb(160, 160, 247);
+}
+
+.input::placeholder {
+    color: rgb(160, 160, 247);
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    margin: 5px 0 0 0;
+}

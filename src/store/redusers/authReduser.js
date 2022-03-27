@@ -17,21 +17,20 @@ const authReduser = (state = defaultState, action) => {
     }
 }
 
-const setLastLegs = (isAuth) => ({ type: 'SET_AUTH', payload: isAuth })
+const setIsAuth = (isAuth) => ({ type: 'SET_AUTH', payload: isAuth })
 
 
 
 
 
-// export const addLeg = (msn, leg) => {
-//     return async (dispatch) => {
-//         const data = await aircraftAPI.addLeg(msn, leg)
-//         if (data.resultCode == 1) {
-//             dispatch(setLastLegs(data.legs))
-//             dispatch(getAircraftData(msn))
-//         }
-//     }
-// }
+export const logIn = (name, password, isRemember) => {
+    return async (dispatch) => {
+        const data = await aircraftAPI.logIn(name, password, isRemember)
+        if (data.resultCode == 1) {
+            dispatch(setIsAuth(data.isAuth))
+        }
+    }
+}
 
 
 

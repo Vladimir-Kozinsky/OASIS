@@ -3,7 +3,7 @@ import Button from '../../../../common/buttons/Button';
 import LegsFinder from '../LegsChange/LegsFinder/LegsFinder';
 import Pagenator from './../LegsChange/LegsBlock/Pagenator/Pagenator';
 import s from './LegsCreateReport.module.css'
-import ReactToPrint from 'react-to-print';
+import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
 
 
 class LegsCreateReport extends React.Component {
@@ -91,22 +91,15 @@ class LegsCreateReport extends React.Component {
         return (
             <div className={s.legsCreateReport}>
                 <LegsFinder legsRequest={this.legsRequest} />
-                {/* {this.props.legs && <Pagenator
-                    legs={this.props.legs.legs}
-                    pageRequest={this.pageRequest}
-                    totalPages={this.props.legs.totalPages}
-                    selectedPage={this.props.legs.selectedPage} />} */}
-
-                <ReactToPrint
-                    trigger={() => {
-                        return <a href="#">Print this out!</a>;
-                    }}
-                    content={() => this.componentRef}
-                    documentTitle={'Tiitle doc'}
-                />
-
                 <div ref={el => (this.componentRef = el)} className={s.legs_block} >
+                    <div className={s.reportHeader}>
+                        <span>From</span>
+                        <span>{this.state.from}</span>
+                        <span>To</span>
+                        <span>{this.state.to}</span>
+                    </div>
                     <div className={s.leg_block}>
+
                         <div className={s.leg_block_item}>
                             <span>Dep. Date</span>
                         </div>
@@ -146,11 +139,17 @@ class LegsCreateReport extends React.Component {
                     </div>
                     {this.legs()}
                 </div>
-
-
                 <div className={s.controlPanel}>
                     <Button event={this.props.setCreteReportMode} text='Cancel' />
-                    <Button text="Print Report" />
+                    <ReactToPrint
+                        content={() => this.componentRef}
+                    >
+                        <PrintContextConsumer>
+                            {({ handlePrint }) => (
+                                <Button text="Print Report" event={handlePrint} />
+                            )}
+                        </PrintContextConsumer>
+                    </ReactToPrint>
                 </div>
             </div>
         )

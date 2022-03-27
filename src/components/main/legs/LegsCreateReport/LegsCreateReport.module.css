@@ -29,6 +29,18 @@
 
 }
 
+.reportHeader {
+    margin: 10px auto;
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    color: rgb(82, 82, 247);
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    border-bottom: 1px solid rgb(195, 195, 255);
+}
+
 .leg_block {
     margin-top: 5px;
     background-color: rgb(241, 241, 252);
@@ -98,6 +110,16 @@
     .legs_block {
         overflow-y: visible;
         border: none;
+    }
+
+    .reportHeader {
+        color: black;
+        font-weight: 400;
+        border-bottom: 1px solid black;
+    }
+
+    .leg_block {
+        background: none;
     }
 
     .leg_block_item span, .leg_block_item_text span {
