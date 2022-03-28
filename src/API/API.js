@@ -36,8 +36,10 @@ const aircraftsData = [
 
 export const aircraftAPI = {
     logIn(name, password, isRemember) {
-        console.log(name, password)
         return proxy.post('/user/auth', { name, password, isRemember }).then(response => response.data)
+    },
+    signUp(userInfo) {
+        return proxy.post('/user/signup', { userInfo}).then(response => response.data)
     },
     getAircrafts() {
         return proxy.get('/aircrafts', {

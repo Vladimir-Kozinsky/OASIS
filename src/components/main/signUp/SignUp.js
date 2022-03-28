@@ -3,13 +3,24 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import Button from '../../../common/buttons/Button';
 import Input from '../../../common/inputs/Input';
 
-const SingUp = (props) => {
+const SingUp = ({ userInfo, signUp }) => {
     return (
         <div className={s.signUp}>
             <Formik
-                initialValues={{}}
+                initialValues={{
+                    login: 'userLogin',
+                    firstName: 'userName',
+                    lastName: 'userLastName',
+                    position: 'engineer',
+                    password: 'password',
+                    confpassword: 'password',
+                    isRemember: false
+                }}
                 validate={(values) => {
                     const errors = {};
+                    if (!values.login) {
+                        errors.login = 'Required';
+                    }
                     if (!values.firstName) {
                         errors.firstName = 'Required';
                     }
@@ -31,7 +42,7 @@ const SingUp = (props) => {
                 }}
 
                 onSubmit={(values, actions) => {
-                    console.log(values)
+                    signUp(values)
                     actions.setSubmitting(false)
                 }}
             >
@@ -44,29 +55,34 @@ const SingUp = (props) => {
                         <h2>Sign Up</h2>
                         <div className={s.fields_block}>
                             <div className={s.field_block}>
+                                <div className={s.label_wrap}><label>Login*</label></div>
+                                <Input type='text' id='login' name='login' placeholder='Enter user login' />
+                                {errors.login ? <span className={s.error}>{errors.login}</span> : null}
+                            </div>
+                            <div className={s.field_block}>
                                 <div className={s.label_wrap}><label>First Name*</label></div>
                                 <Input type='text' id='firstName' name='firstName' placeholder='Enter user first name' />
-                                {errors.firstName ? <span>{errors.firstName}</span> : null}
+                                {errors.firstName ? <span className={s.error}>{errors.firstName}</span> : null}
                             </div>
                             <div className={s.field_block}>
                                 <div className={s.label_wrap}><label>Last Name*</label></div>
                                 <Input type='text' id='lastName' name='lastName' placeholder='Enter user last name' />
-                                {errors.lastName ? <span>{errors.lastName}</span> : null}
+                                {errors.lastName ? <span className={s.error}>{errors.lastName}</span> : null}
                             </div>
                             <div className={s.field_block}>
                                 <div className={s.label_wrap}><label>Position*</label></div>
                                 <Input type='text' id='position' name='position' placeholder='Enter position' />
-                                {errors.position ? <span>{errors.position}</span> : null}
+                                {errors.position ? <span className={s.error}>{errors.position}</span> : null}
                             </div>
                             <div className={s.field_block}>
                                 <div className={s.label_wrap}><label>Password*</label></div>
                                 <Input type='password' id='password' name='password' placeholder='Enter password' />
-                                {errors.password ? <span>{errors.password}</span> : null}
+                                {errors.password ? <span className={s.error}>{errors.password}</span> : null}
                             </div>
                             <div className={s.field_block}>
                                 <div className={s.label_wrap}><label>Confirm Password*</label></div>
                                 <Input type='password' id='confpassword' name='confpassword' placeholder='Confirm password' />
-                                {errors.confpassword ? <span>{errors.confpassword}</span> : null}
+                                {errors.confpassword ? <span className={s.error}>{errors.confpassword}</span> : null}
                             </div>
                         </div>
 

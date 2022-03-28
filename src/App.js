@@ -10,6 +10,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import AUTH_W from './components/wrapComponents/Auth_w';
 import SignUp from './components/main/signUp/SignUp';
+import SIGNUP_W from './components/wrapComponents/SignUp_w';
 
 
 class App extends Component {
@@ -26,10 +27,10 @@ class App extends Component {
         <Footer />
         <div className={s.main} >
           <Routes>
-            <Route path='user/auth' element={<AUTH_W />} />
+            <Route path='user/auth' element={this.props.isAuth ? <Navigate to="/" /> : <AUTH_W />} />
             <Route path='legs' element={!this.props.isAuth ? <Navigate to="/user/auth" /> : <LEGS_W />} />
             <Route path='/' element={!this.props.isAuth ? <Navigate to="/user/auth" /> : <Home />} />
-            <Route path='user/singup' element={<SignUp />} />
+            <Route path='user/singup' element={<SIGNUP_W />} />
           </Routes>
         </div>
       </div>

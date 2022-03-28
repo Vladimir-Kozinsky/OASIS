@@ -9,8 +9,8 @@ const Auth = ({ isAuth, logIn }) => {
         <div className={s.auth}>
             <Formik
                 initialValues={{
-                    name: 'user',
-                    password: 'user',
+                    name: 'userLogin',
+                    password: 'password',
                     isRemember: false
                 }}
                 validate={(values) => {
