@@ -57,7 +57,7 @@ const Auth = ({ isAuth, logIn }) => {
                             <Button isDisabled={isSubmitting} type="submit" text='Login' />
                         </div>
                         <div className={s.link_block} >
-                            <span>Not registered yet? <Link to='/register' >Create an user</Link></span>
+                            <span>Not registered yet? <Link to='/user/singup' >Create an user</Link></span>
                         </div>
                     </Form>
                 )}

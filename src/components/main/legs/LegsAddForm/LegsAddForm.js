@@ -119,7 +119,7 @@ const LegsAddForm = (props) => {
                     if (!values.depDate) {
                         errors.depDate = 'Required';
                     } else if (!values.flightNumber) {
-                        errors.flightNumber = 'Requir0ed';
+                        errors.flightNumber = 'Required';
                     } else if (!values.from) {
                         errors.from = 'Required';
                     } else if (!values.to) {

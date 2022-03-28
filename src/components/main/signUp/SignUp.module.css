@@ -1,0 +1,54 @@
+.signUp {
+    width: 300px;
+    margin: 90px auto;
+    border: 1px solid rgb(195, 195, 255);
+    box-shadow: 5px 5px rgb(234, 234, 252);
+    display: flex;
+    align-items: center;
+}
+
+.form {
+    width: 230px;
+    margin: 0 auto;
+    /* border: 1px solid rgb(195, 195, 255); */
+}
+
+.field_block {
+    margin: 10px auto;
+    display: inline-block;
+    color: rgb(119, 119, 250);
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    align-items: center;
+}
+
+.addFormControlPanel {
+    margin: 10px auto 20px;
+    width: 100px;
+}
+
+
+.label_wrap {
+    margin-bottom: 4px;
+    text-align: start;
+}
+
+.rem_block {
+    margin: 10px 0 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rem_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rem_wrap label {
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}

@@ -1,6 +1,6 @@
 import s from './App.module.css';
 import { Component } from 'react'
-import Home from './components/main/Home';
+import Home from './components/main/home/Home';
 import { Redirect, Routes, Route, Link, Navigate } from "react-router-dom";
 import Footer from './components/footer/Footer';
 import MENU_W from './components/wrapComponents/Menu_w';
@@ -9,12 +9,13 @@ import LEGS_W from './components/wrapComponents/Legs_w';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import AUTH_W from './components/wrapComponents/Auth_w';
+import SignUp from './components/main/signUp/SignUp';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {}
   }
 
   render() {
@@ -25,9 +26,10 @@ class App extends Component {
         <Footer />
         <div className={s.main} >
           <Routes>
-            <Route path='auth' element={<AUTH_W />} />
-            <Route path='legs' element={<LEGS_W />} />
-            <Route path='/' element={!this.props.isAuth ? <Navigate to="/auth" /> : <Home />} />
+            <Route path='user/auth' element={<AUTH_W />} />
+            <Route path='legs' element={!this.props.isAuth ? <Navigate to="/user/auth" /> : <LEGS_W />} />
+            <Route path='/' element={!this.props.isAuth ? <Navigate to="/user/auth" /> : <Home />} />
+            <Route path='user/singup' element={<SignUp />} />
           </Routes>
         </div>
       </div>
@@ -38,7 +40,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-      isAuth: state.auth.isAuth,
+    isAuth: state.auth.isAuth,
   }
 }
 

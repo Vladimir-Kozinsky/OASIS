@@ -27,7 +27,7 @@ export const logIn = (name, password, isRemember) => {
     return async (dispatch) => {
         const data = await aircraftAPI.logIn(name, password, isRemember)
         if (data.resultCode == 1) {
-            dispatch(setIsAuth(data.isAuth))
+            dispatch(setIsAuth(true))
         }
     }
 }
